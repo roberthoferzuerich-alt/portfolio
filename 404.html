@@ -153,16 +153,28 @@
         <span>GitHub Showcase</span>
       </div>
 
-      <!-- Dark Mode / Light Mode Switch Button -->
-      <button 
-        id="themeToggleBtn" 
-        onclick="toggleTheme()" 
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/10 hover:bg-white/15 dark:bg-white/5 dark:hover:bg-white/10 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95"
-        title="Zwischen Dark Mode und Light Mode wechseln"
-      >
-        <span id="themeIcon" class="text-base">🌙</span>
-        <span id="themeText">Dark Mode</span>
-      </button>
+      <div class="flex items-center gap-2">
+        <!-- QR Code for Portfolio on Phone -->
+        <button 
+          onclick="openQrModal('portfolio')" 
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
+          title="Portfolio auf dem Smartphone öffnen per QR-Code"
+        >
+          <span class="text-base">📱</span>
+          <span class="hidden sm:inline">Handy QR-Code</span>
+        </button>
+
+        <!-- Dark Mode / Light Mode Switch Button -->
+        <button 
+          id="themeToggleBtn" 
+          onclick="toggleTheme()" 
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
+          title="Zwischen Dark Mode und Light Mode wechseln"
+        >
+          <span id="themeIcon" class="text-base">🌙</span>
+          <span id="themeText">Dark Mode</span>
+        </button>
+      </div>
     </div>
 
     <div class="text-center">
@@ -282,6 +294,10 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             <span>Code (.zip)</span>
           </a>
+          <button id="modalQrBtn" onclick="openCurrentProjectQr()" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="QR-Code zum Scannen mit dem Smartphone">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+            <span>QR-Code</span>
+          </button>
         </div>
       </div>
 
@@ -295,6 +311,37 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
           <span>Live Demo im Web</span>
         </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+  <div id="qrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
+    <div id="qrModalBox" class="modal-inner border w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300 text-center relative">
+      
+      <button onclick="closeQrModal()" class="modal-close absolute top-4 right-4 p-2 rounded-full transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
+        📱
+      </div>
+
+      <h3 id="qrModalTitle" class="text-xl font-extrabold mb-1">Am Smartphone öffnen</h3>
+      <p id="qrModalSubtitle" class="text-xs opacity-75 mb-4">Halte deine Smartphone-Kamera auf diesen Code:</p>
+
+      <!-- QR Image Container -->
+      <div class="bg-white p-3.5 rounded-2xl inline-block shadow-md border border-slate-200 mb-4">
+        <img id="qrCodeImage" src="" alt="QR Code" class="w-52 h-52 block mx-auto object-contain" />
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input id="qrUrlInput" type="text" readonly class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-85 select-all" />
+        <button onclick="copyQrUrl()" class="px-3 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
+          Kopieren
+        </button>
       </div>
     </div>
   </div>
@@ -685,9 +732,12 @@
       renderRepositories();
     });
 
+    let currentModalRepo = null;
+
     function openModal(repoId) {
       const repo = repositories.find(r => r.id === repoId);
       if (!repo) return;
+      currentModalRepo = repo;
 
       document.getElementById('modalIcon').innerText = repo.icon;
       document.getElementById('modalTitle').innerText = repo.name;
@@ -754,7 +804,70 @@
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeModal();
+        closeQrModal();
+      }
+    });
+
+    // QR Code Functions
+    function openQrModal(type, customUrl, customTitle, customSub) {
+      const qrModal = document.getElementById('qrModal');
+      const qrBox = document.getElementById('qrModalBox');
+      const qrImg = document.getElementById('qrCodeImage');
+      const qrTitle = document.getElementById('qrModalTitle');
+      const qrSub = document.getElementById('qrModalSubtitle');
+      const qrInput = document.getElementById('qrUrlInput');
+
+      let targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
+      let title = 'Portfolio am Handy öffnen 📲';
+      let subtitle = 'Scanne den Code mit deiner Handykamera:';
+
+      if (type === 'portfolio') {
+        targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
+        title = 'Portfolio am Handy öffnen 📲';
+        subtitle = 'Scanne den Code für die mobile Ansicht:';
+      } else if (customUrl) {
+        targetUrl = customUrl;
+        title = customTitle || 'App aufrufen';
+        subtitle = customSub || 'Scanne den Code für den mobilen Aufruf:';
+      }
+
+      qrTitle.innerText = title;
+      qrSub.innerText = subtitle;
+      qrInput.value = targetUrl;
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(targetUrl)}`;
+
+      qrModal.classList.remove('opacity-0', 'pointer-events-none');
+      qrBox.classList.remove('scale-95');
+      qrBox.classList.add('scale-100');
+    }
+
+    function openCurrentProjectQr() {
+      if (!currentModalRepo) return;
+      const url = currentModalRepo.liveUrl || `https://github.com/roberthoferzuerich-alt/${currentModalRepo.id}/releases`;
+      const title = `${currentModalRepo.name} 📲`;
+      const subtitle = currentModalRepo.liveUrl ? 'Scanne den Code, um die Web-App direkt auf dem Handy zu öffnen:' : 'Scanne den Code für den Download der Release-Dateien:';
+      openQrModal('project', url, title, subtitle);
+    }
+
+    function closeQrModal() {
+      const qrModal = document.getElementById('qrModal');
+      const qrBox = document.getElementById('qrModalBox');
+      qrBox.classList.remove('scale-100');
+      qrBox.classList.add('scale-95');
+      qrModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function copyQrUrl() {
+      const input = document.getElementById('qrUrlInput');
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      alert('Link in die Zwischenablage kopiert: ' + input.value);
+    }
+
+    document.getElementById('qrModal').addEventListener('click', (e) => {
+      if (e.target.id === 'qrModal') closeQrModal();
     });
 
     // Init Theme on load
