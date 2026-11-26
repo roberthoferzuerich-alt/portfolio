@@ -9,6 +9,7 @@
 ## 🌟 Übersicht der Projekte
 
 ### 💙 Flutter & Mobile / Web
+* **[Suisse Radio](https://github.com/roberthoferzuerich-alt/Suisse-Radio)** – Umfassende Schweizer Radio-Streaming-App für Android und iOS. Live-Streaming aller Schweizer Sender (SRF, RTS, RSI, Lokalsender), interaktive Playlists mit Drag & Drop Reordering, Hi-Fi Streaming- & Export-Studio (MP3 320k, FLAC, AAC, WAV, M3U8, PLS), animierter Audio-Equalizer und modernes Material Design 3.
 * **[PhotoKids Studio](https://github.com/roberthoferzuerich-alt/PhotoKids-Studio)** – Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web. Inklusive Studio-Editor, Alben, Diashow, Sticker-System und PIN-geschütztem Elternmodus. *(Live Demo verfügbar)*
 * **[chatconnect-app](https://github.com/roberthoferzuerich-alt/chatconnect-app)** – Reaktive Mobile Chat-Applikation für das ChatConnect-Kommunikationsnetzwerk.
 * **[EasyQuill](https://github.com/roberthoferzuerich-alt/EasyQuill)** – Eleganter Rich-Text Editor und Notizblock für fokussiertes Schreiben.
@@ -34,7 +35,7 @@
 
 ## 🎨 Features dieser Web-App
 * **🌓 Dark Mode & Light Mode:** Nahtloses Umschalten mit persistenter Speicherung im Browser.
-* **🔍 Live-Echtzeitsuche:** Durchsuche alle 16 Repositories nach Namen, Beschreibungen oder Programmiersprachen.
+* **🔍 Live-Echtzeitsuche:** Durchsuche alle 17 Repositories nach Namen, Beschreibungen oder Programmiersprachen.
 * **🏷️ Kategorie-Filter:** Filterung nach Flutter 💙, PHP/Laravel 🐘 oder Java & Tools ⚙️.
 * **📥 Release & ZIP-Downloads:** Direkte Download-Buttons für APK-Dateien und Quellcode-Archive.
 * **🚀 Responsive Design:** Optimiert für Smartphone, Tablet und Desktop-Bildschirme.
