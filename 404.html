@@ -775,15 +775,29 @@
       const zipBtn = document.getElementById('modalZipBtn');
 
       dlSection.classList.remove('hidden');
-      if (repo.directApkUrl) {
+
+      if (repo.liveUrl) {
+        // Prio 1: Live WebApp Link
+        releaseBtn.href = repo.liveUrl;
+        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all";
+        releaseBtn.innerHTML = `
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span>🌐 WebApp öffnen 🚀</span>
+        `;
+        releaseBtn.removeAttribute('download');
+      } else if (repo.directApkUrl) {
+        // Prio 2: Direct APK Download
         releaseBtn.href = repo.directApkUrl;
+        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>APK herunterladen (v1.0.1, 62.8 MB) 📥</span>
+          <span>APK herunterladen 📥</span>
         `;
-        releaseBtn.setAttribute('download', 'PhotoKids-Studio-v1.0.0.apk');
+        releaseBtn.setAttribute('download', `${repo.name}.apk`);
       } else {
+        // Prio 3: GitHub Releases
         releaseBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/releases`;
+        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span>Releases (.apk & Assets)</span>
@@ -796,6 +810,10 @@
       const liveBtn = document.getElementById('modalLiveDemo');
       if (repo.liveUrl) {
         liveBtn.href = repo.liveUrl;
+        liveBtn.innerHTML = `
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span>🌐 WebApp öffnen</span>
+        `;
         liveBtn.classList.remove('hidden');
       } else {
         liveBtn.classList.add('hidden');
