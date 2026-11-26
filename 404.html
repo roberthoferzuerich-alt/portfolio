@@ -377,31 +377,36 @@
         language: "Dart",
         badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
         shortDesc: "Moderne Mobile Chat-Applikation für das ChatConnect-Kommunikationsnetzwerk.",
-        fullDesc: "Reaktive Mobile-App für plattformübergreifenden Echtzeitaustausch. Konzipiert für zuverlässige Kommunikation, intuitive Chat-Navigation und Medienversand.",
+        fullDesc: "Reaktive Mobile-App für plattformübergreifenden Echtzeitaustausch. Konzipiert für zuverlässige Kommunikation, intuitive Chat-Navigation, Medienversand und WebRTC-Videoanrufe.",
         highlights: [
-          "Echtzeit-Nachrichtenübertragung und Benachrichtigungen",
-          "Moderne UI mit Gruppen- und Einzelchats",
-          "Reaktive Datenbindung und Zustandsverwaltung"
+          "Echtzeit-Nachrichtenübertragung und Push-Benachrichtigungen",
+          "Moderne UI mit Gruppen-, Einzelchats & Beifahrer-KI",
+          "Reaktive Datenbindung und Zustandsverwaltung mit Riverpod",
+          "Direkte APK-Bereitstellung für Android-Geräte"
         ],
-        tech: ["Flutter", "Dart", "WebSockets", "REST API", "Mobile UI"],
-        githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-app"
+        tech: ["Flutter", "Dart", "Riverpod", "WebSockets", "REST API", "WebRTC"],
+        githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-app",
+        directApkUrl: "https://rhz.internet-box.ch:8443/downloads/ChatConnect.apk"
       },
       {
         id: "chatconnect-backend",
         name: "chatconnect-backend",
         category: "php",
         icon: "⚡",
-        language: "PHP / Blade",
+        language: "PHP / Laravel",
         badgeColor: "bg-purple-500/20 text-purple-500 border-purple-500/30",
-        shortDesc: "Leistungsstarkes Backend & REST/WebSocket-API für das ChatConnect-System.",
-        fullDesc: "Zentraler Serverdienst zur Authentifizierung, Sitzungsverwaltung, WebSocket-Broadcasting und dauerhaften Speicherung von Chat-Konversationen.",
+        shortDesc: "Leistungsstarkes Backend, WebApp & REST/WebSocket-API für ChatConnect.",
+        fullDesc: "Zentraler Laravel-Serverdienst auf Raspberry Pi & Cloud. Bietet Authentifizierung, WebSocket-Echtzeitkommunikation, WebRTC-Calls, Statusanzeigen, 3D-STL-Streaming und die vollständige WebApp.",
         highlights: [
-          "Robuste Authentifizierung und Rollenverwaltung",
-          "WebSocket-Event-Broadcasting für synchrone Nachrichten",
-          "Strukturierte Datenbankmigrationen und relationale Modelle"
+          "Echtzeit-WebSocket-Broadcasting & WebRTC Videoanrufe",
+          "Integrierte WebApp mit Sprachnachrichten & Version 1.0.6",
+          "Raspberry Pi Server-Deployment mit automatischer Synchronisation",
+          "REST-API für die native Flutter-App mit APK-Download-Distribution"
         ],
-        tech: ["PHP", "Laravel", "Blade", "MySQL", "WebSockets"],
-        githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-backend"
+        tech: ["PHP 8.2", "Laravel 11", "Blade", "MySQL", "WebSockets", "Raspberry Pi"],
+        githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-backend",
+        liveUrl: "https://rhz.internet-box.ch:8443",
+        directApkUrl: "https://rhz.internet-box.ch:8443/downloads/ChatConnect.apk"
       },
       {
         id: "chatconnect-docs",
