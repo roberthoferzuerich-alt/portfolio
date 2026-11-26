@@ -285,7 +285,11 @@
             <p class="text-xs opacity-75">Installations- und Paketdateien für dieses Projekt</p>
           </div>
         </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto">
+        <div class="flex items-center gap-2 w-full sm:w-auto flex-wrap">
+          <a id="modalWebBtn" href="#" target="_blank" class="hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            <span>🌐 WebApp öffnen</span>
+          </a>
           <a id="modalReleaseBtn" href="#" target="_blank" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             <span>Release (.apk)</span>
@@ -771,39 +775,43 @@
 
       // Release & Zip Download
       const dlSection = document.getElementById('modalDownloadSection');
+      const webBtn = document.getElementById('modalWebBtn');
       const releaseBtn = document.getElementById('modalReleaseBtn');
       const zipBtn = document.getElementById('modalZipBtn');
 
       dlSection.classList.remove('hidden');
 
+      // WebApp Button im Release-Kasten
       if (repo.liveUrl) {
-        // Prio 1: Live WebApp Link
-        releaseBtn.href = repo.liveUrl;
-        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all";
-        releaseBtn.innerHTML = `
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span>🌐 WebApp öffnen 🚀</span>
-        `;
-        releaseBtn.removeAttribute('download');
-      } else if (repo.directApkUrl) {
-        // Prio 2: Direct APK Download
+        webBtn.href = repo.liveUrl;
+        webBtn.classList.remove('hidden');
+      } else {
+        webBtn.classList.add('hidden');
+      }
+
+      // APK Download / Release Button
+      if (repo.directApkUrl) {
         releaseBtn.href = repo.directApkUrl;
         releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>APK herunterladen 📥</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Release (.apk) 📥</span>
         `;
         releaseBtn.setAttribute('download', `${repo.name}.apk`);
-      } else {
-        // Prio 3: GitHub Releases
+        releaseBtn.classList.remove('hidden');
+      } else if (repo.category === 'flutter' || repo.category === 'mobile') {
         releaseBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/releases`;
         releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span>Releases (.apk & Assets)</span>
         `;
         releaseBtn.removeAttribute('download');
+        releaseBtn.classList.remove('hidden');
+      } else {
+        releaseBtn.classList.add('hidden');
       }
+
       zipBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/archive/refs/heads/main.zip`;
 
       // Live Demo Link
