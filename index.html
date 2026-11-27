@@ -279,17 +279,22 @@
     @media (max-width: 639px) {
       .modal-wrapper {
         align-items: flex-end !important;
+        justify-content: flex-end !important;
         padding: 0 !important;
-        padding-bottom: env(safe-area-inset-bottom, 0px) !important;
       }
       .modal-box-responsive {
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
-        border-top-left-radius: 2rem !important;
-        border-top-right-radius: 2rem !important;
-        max-height: calc(88dvh - env(safe-area-inset-bottom, 0px)) !important;
+        border-top-left-radius: 1.75rem !important;
+        border-top-right-radius: 1.75rem !important;
         width: 100% !important;
-        padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem)) !important;
+        height: 85vh !important;
+        height: 85dvh !important;
+        max-height: 85vh !important;
+        max-height: 85dvh !important;
+        padding: 1rem 1rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem)) 1rem !important;
+        display: flex !important;
+        flex-direction: column !important;
         transform: translateY(100%);
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       }
@@ -299,10 +304,10 @@
       .qr-box-responsive {
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
-        border-top-left-radius: 2rem !important;
-        border-top-right-radius: 2rem !important;
+        border-top-left-radius: 1.75rem !important;
+        border-top-right-radius: 1.75rem !important;
         width: 100% !important;
-        padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem)) !important;
+        padding: 1.25rem 1.25rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem)) 1.25rem !important;
         transform: translateY(100%);
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       }
@@ -469,17 +474,17 @@
       <div class="w-12 h-1.5 rounded-full bg-slate-400/40 mx-auto mb-2.5 sm:hidden cursor-pointer shrink-0" onclick="closeModal()"></div>
 
       <!-- Top Navigation Bar: Back Button (Zurück) & Close Button (X) -->
-      <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10 dark:border-white/10 border-slate-200 shrink-0">
-        <button onclick="closeModal()" class="touch-press inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 text-pink-400 font-bold text-xs sm:text-sm shadow-sm transition-all text-inherit group" aria-label="Zurück zur Übersicht" title="Zurück zur Übersicht">
-          <svg class="w-4 h-4 text-pink-400 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 dark:border-white/10 border-slate-200 shrink-0">
+        <button onclick="closeModal()" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md transition-all shrink-0" aria-label="Zurück zur Übersicht" title="Zurück zur Übersicht">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
           <span>← Zurück</span>
         </button>
 
-        <span class="text-xs font-semibold opacity-60">Projektdetails</span>
+        <span class="text-xs font-bold opacity-75">Projektdetails</span>
 
-        <button onclick="closeModal()" class="modal-close p-2.5 rounded-full transition-colors flex items-center justify-center" aria-label="Schließen" title="Schließen">
+        <button onclick="closeModal()" class="modal-close p-2 rounded-full transition-colors flex items-center justify-center shrink-0" aria-label="Schließen" title="Schließen">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
@@ -560,20 +565,20 @@
       </div>
 
       <!-- Action Buttons Footer with Safe Area Margin -->
-      <div class="flex flex-col sm:flex-row gap-2.5 pt-3 pb-8 sm:pb-0 border-t border-white/10 dark:border-white/10 border-slate-200 shrink-0">
-        <button onclick="closeModal()" class="touch-press inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 text-pink-400 font-bold text-xs sm:text-sm transition-all shrink-0" title="Zurück zur Übersicht">
+      <div class="flex items-center gap-2 pt-2.5 border-t border-white/10 dark:border-white/10 border-slate-200 shrink-0">
+        <button onclick="closeModal()" class="touch-press inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 text-pink-400 font-bold text-xs transition-all shrink-0" title="Zurück">
           <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
-          <span>← Zurück zur Übersicht</span>
+          <span class="hidden xs:inline">Zurück</span>
         </button>
-        <a id="modalBrowserLink" href="#" target="_blank" class="touch-press flex-1 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-xs sm:text-sm shadow-md shadow-pink-500/25 hover:opacity-95 transition-all">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>Auf GitHub ansehen</span>
+        <a id="modalBrowserLink" href="#" target="_blank" class="touch-press flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-xs shadow-md shadow-pink-500/25 hover:opacity-95 transition-all truncate">
+          <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="truncate">Auf GitHub ansehen</span>
         </a>
-        <a id="modalLiveDemo" href="#" target="_blank" class="touch-press hidden flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-xs sm:text-sm shadow-md shadow-teal-500/25 hover:opacity-95 transition-all">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span>Live Demo öffnen 🚀</span>
+        <a id="modalLiveDemo" href="#" target="_blank" class="touch-press hidden flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-xs sm:text-sm shadow-md shadow-teal-500/25 hover:opacity-95 transition-all truncate">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <span class="truncate">Live Demo</span>
         </a>
       </div>
     </div>
