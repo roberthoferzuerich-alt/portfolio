@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de" class="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,56 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.03); }
+
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.9;
+        transform: scale(1.03);
+      }
     }
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .animate-fadeInUp {
       animation: fadeInUp 0.4s ease-out forwards;
     }
-    
+
     /* Dark Theme Styles (Default) */
     body.dark {
       background-color: #120E1C;
       color: #f1f5f9;
     }
+
     body.dark .ambient-glow {
       background: linear-gradient(to right, rgba(255, 82, 119, 0.2), rgba(156, 39, 176, 0.2), rgba(0, 196, 180, 0.2));
     }
+
     body.dark .glass-card {
       background: rgba(255, 255, 255, 0.04);
       border-color: rgba(255, 255, 255, 0.08);
     }
+
     body.dark .glass-card:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 82, 119, 0.4);
       box-shadow: 0 16px 32px -8px rgba(255, 82, 119, 0.25);
     }
+
     body.dark .modal-inner {
       background-color: #1C162A;
       border-color: rgba(255, 255, 255, 0.15);
@@ -46,73 +69,90 @@
       background-color: #FAF8FC;
       color: #1e293b;
     }
+
     body.light .ambient-glow {
       background: linear-gradient(to right, rgba(255, 82, 119, 0.12), rgba(156, 39, 176, 0.08), rgba(0, 196, 180, 0.12));
     }
+
     body.light .glass-card {
       background: #FFFFFF;
       border-color: rgba(0, 0, 0, 0.06);
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
     }
+
     body.light .glass-card:hover {
       transform: translateY(-5px);
       background: #FFFFFF;
       border-color: rgba(255, 82, 119, 0.5);
       box-shadow: 0 16px 32px -6px rgba(255, 82, 119, 0.2);
     }
+
     body.light .text-gradient-header {
       background: linear-gradient(to right, #1e293b, #334155, #be185d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     body.light .header-subtitle {
       color: #64748b;
     }
+
     body.light .card-title {
       color: #0f172a;
     }
+
     body.light .card-desc {
       color: #64748b;
     }
+
     body.light .card-icon-bg {
       background: #F4EFF8;
       border-color: #E6DEF0;
     }
+
     body.light .search-box {
       background: #FFFFFF;
       border-color: #E2E8F0;
       color: #0f172a;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
+
     body.light .search-box::placeholder {
       color: #94a3b8;
     }
+
     body.light .filter-unselected {
       background: #FFFFFF;
       color: #475569;
       border: 1px solid #E2E8F0;
     }
+
     body.light .filter-unselected:hover {
       background: #F1F5F9;
     }
+
     body.light .modal-inner {
       background-color: #FFFFFF;
       border-color: #E2E8F0;
       color: #0f172a;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
+
     body.light .modal-desc {
       color: #475569;
     }
+
     body.light .modal-badge {
       background: #F1F5F9;
       color: #334155;
       border-color: #E2E8F0;
     }
+
     body.light .modal-close {
       background: #F1F5F9;
       color: #64748b;
     }
+
     body.light .modal-close:hover {
       background: #E2E8F0;
       color: #0f172a;
@@ -123,30 +163,38 @@
       -webkit-backdrop-filter: blur(14px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .modal-backdrop {
       background: rgba(15, 12, 25, 0.85);
       backdrop-filter: blur(10px);
     }
+
     ::-webkit-scrollbar {
       width: 8px;
     }
+
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 82, 119, 0.3);
       border-radius: 4px;
     }
   </style>
 </head>
-<body id="appBody" class="dark min-h-screen font-sans selection:bg-[#FF5277] selection:text-white pb-16 transition-colors duration-300">
+
+<body id="appBody"
+  class="dark min-h-screen font-sans selection:bg-[#FF5277] selection:text-white pb-16 transition-colors duration-300">
 
   <!-- Top Ambient Glow -->
-  <div class="ambient-glow fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] blur-[120px] pointer-events-none -z-10 transition-all duration-500"></div>
+  <div
+    class="ambient-glow fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] blur-[120px] pointer-events-none -z-10 transition-all duration-500">
+  </div>
 
   <!-- Header Section -->
   <header class="max-w-6xl mx-auto pt-8 pb-6 px-4 sm:px-6">
-    
+
     <!-- Top Bar with Profile Badge & Dark Mode Button -->
     <div class="flex items-center justify-between gap-3 mb-6">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-pink-500 animate-fadeInUp shadow-sm">
+      <div
+        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-pink-500 animate-fadeInUp shadow-sm">
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
         <span>Robert Hofer • Zürich 🇨🇭</span>
         <span class="opacity-40">•</span>
@@ -155,22 +203,17 @@
 
       <div class="flex items-center gap-2">
         <!-- QR Code for Portfolio on Phone -->
-        <button 
-          onclick="openQrModal('portfolio')" 
+        <button onclick="openQrModal('portfolio')"
           class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
-          title="Portfolio auf dem Smartphone öffnen per QR-Code"
-        >
+          title="Portfolio auf dem Smartphone öffnen per QR-Code">
           <span class="text-base">📱</span>
           <span class="hidden sm:inline">Handy QR-Code</span>
         </button>
 
         <!-- Dark Mode / Light Mode Switch Button -->
-        <button 
-          id="themeToggleBtn" 
-          onclick="toggleTheme()" 
+        <button id="themeToggleBtn" onclick="toggleTheme()"
           class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
-          title="Zwischen Dark Mode und Light Mode wechseln"
-        >
+          title="Zwischen Dark Mode und Light Mode wechseln">
           <span id="themeIcon" class="text-base">🌙</span>
           <span id="themeText">Dark Mode</span>
         </button>
@@ -178,34 +221,42 @@
     </div>
 
     <div class="text-center">
-      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-gradient-header bg-gradient-to-r from-white via-slate-100 to-pink-300 bg-clip-text text-transparent mb-3 animate-fadeInUp">
+      <h1
+        class="text-3xl sm:text-5xl font-extrabold tracking-tight text-gradient-header bg-gradient-to-r from-white via-slate-100 to-pink-300 bg-clip-text text-transparent mb-3 animate-fadeInUp">
         Meine Open-Source Repositories 🚀
       </h1>
       <p class="header-subtitle text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 animate-fadeInUp">
-        Entdecke alle 17 Projekte von Robert Hofer – von modernen Flutter-Apps für Kinder und Kreative bis hin zu performanten Backend- und IoT-Lösungen. Klicke auf ein Projekt für alle Details.
+        Entdecke alle 17 Projekte von Robert Hofer – von modernen Flutter-Apps für Kinder und Kreative bis hin zu
+        performanten Backend- und IoT-Lösungen. Klicke auf ein Projekt für alle Details.
       </p>
 
       <!-- Search & Filter Controls -->
       <div class="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 items-center justify-between mb-8">
         <!-- Search Input -->
         <div class="relative w-full sm:w-80">
-          <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="Repository suchen (z.B. PhotoKids, Piano)..."
-            class="search-box w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/20 text-sm text-inherit placeholder-slate-400 transition-all"
-          />
-          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <input type="text" id="searchInput" placeholder="Repository suchen (z.B. PhotoKids, Piano)..."
+            class="search-box w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/20 text-sm text-inherit placeholder-slate-400 transition-all" />
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
 
         <!-- Category Filter Pills -->
         <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1" id="filterContainer">
-          <button onclick="setFilter('all')" class="filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/25" data-filter="all">Alle (17)</button>
-          <button onclick="setFilter('flutter')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="flutter">Flutter 💙</button>
-          <button onclick="setFilter('php')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="php">PHP/Laravel 🐘</button>
-          <button onclick="setFilter('other')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="other">Java & Tools ⚙️</button>
+          <button onclick="setFilter('all')"
+            class="filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/25"
+            data-filter="all">Alle (17)</button>
+          <button onclick="setFilter('flutter')"
+            class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10"
+            data-filter="flutter">Flutter 💙</button>
+          <button onclick="setFilter('php')"
+            class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10"
+            data-filter="php">PHP/Laravel 🐘</button>
+          <button onclick="setFilter('other')"
+            class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10"
+            data-filter="other">Java & Tools ⚙️</button>
         </div>
       </div>
     </div>
@@ -226,9 +277,11 @@
   </main>
 
   <!-- Detail Modal -->
-  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="modalBox" class="modal-inner border w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 overflow-hidden relative">
-      
+  <div id="detailModal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
+    <div id="modalBox"
+      class="modal-inner border w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 overflow-hidden relative">
+
       <!-- Close Button -->
       <button onclick="closeModal()" class="modal-close absolute top-5 right-5 p-2 rounded-full transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,13 +291,17 @@
 
       <!-- Modal Content Header -->
       <div class="flex items-start gap-4 mb-5">
-        <div id="modalIcon" class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 bg-pink-500/20 text-pink-400 border border-pink-500/30">
+        <div id="modalIcon"
+          class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 bg-pink-500/20 text-pink-400 border border-pink-500/30">
           📁
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span id="modalLanguage" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">Dart</span>
-            <span id="modalCategory" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/5 text-slate-400 border border-white/10">Mobile & Web</span>
+            <span id="modalLanguage"
+              class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">Dart</span>
+            <span id="modalCategory"
+              class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/5 text-slate-400 border border-white/10">Mobile
+              & Web</span>
           </div>
           <h2 id="modalTitle" class="text-2xl font-extrabold">Repository Name</h2>
         </div>
@@ -258,7 +315,9 @@
       <!-- Features / Highlights -->
       <div class="mb-6">
         <h4 class="text-xs uppercase tracking-wider text-pink-500 font-bold mb-3 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
           Highlights & Architektur
         </h4>
         <ul id="modalHighlights" class="space-y-2 text-xs sm:text-sm">
@@ -275,9 +334,11 @@
       </div>
 
       <!-- Release & Download Actions for Flutter & Apps -->
-      <div id="modalDownloadSection" class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div id="modalDownloadSection"
+        class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+          <div
+            class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
             📦
           </div>
           <div>
@@ -286,20 +347,40 @@
           </div>
         </div>
         <div class="flex items-center gap-2 w-full sm:w-auto flex-wrap">
-          <a id="modalWebBtn" href="#" target="_blank" class="hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          <a id="modalWebBtn" href="#" target="_blank"
+            class="hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
             <span>🌐 WebApp öffnen</span>
           </a>
-          <a id="modalReleaseBtn" href="#" target="_blank" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <a id="modalReleaseBtn" href="#" target="_blank"
+            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
             <span>Release (.apk)</span>
           </a>
-          <a id="modalZipBtn" href="#" target="_blank" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all" title="Quellcode als ZIP herunterladen">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <a id="modalZipBtn" href="#" target="_blank"
+            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all"
+            title="Quellcode als ZIP herunterladen">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+              </path>
+            </svg>
             <span>Code (.zip)</span>
           </a>
-          <button id="modalQrBtn" onclick="openCurrentProjectQr()" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="QR-Code zum Scannen mit dem Smartphone">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+          <button id="modalQrBtn" onclick="openCurrentProjectQr()"
+            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit"
+            title="QR-Code zum Scannen mit dem Smartphone">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z">
+              </path>
+            </svg>
             <span>QR-Code</span>
           </button>
         </div>
@@ -307,12 +388,20 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/10 dark:border-white/10 border-slate-200">
-        <a id="modalBrowserLink" href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-sm shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <a id="modalBrowserLink" href="#" target="_blank"
+          class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-sm shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
           <span>Auf GitHub ansehen</span>
         </a>
-        <a id="modalLiveDemo" href="#" target="_blank" class="hidden flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-sm shadow-lg shadow-teal-500/25 hover:opacity-95 transition-all">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        <a id="modalLiveDemo" href="#" target="_blank"
+          class="hidden flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-sm shadow-lg shadow-teal-500/25 hover:opacity-95 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
           <span>Live Demo im Web</span>
         </a>
       </div>
@@ -320,16 +409,19 @@
   </div>
 
   <!-- QR Code Modal -->
-  <div id="qrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="qrModalBox" class="modal-inner border w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300 text-center relative">
-      
+  <div id="qrModal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
+    <div id="qrModalBox"
+      class="modal-inner border w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300 text-center relative">
+
       <button onclick="closeQrModal()" class="modal-close absolute top-4 right-4 p-2 rounded-full transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
-      <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
+      <div
+        class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
         📱
       </div>
 
@@ -342,8 +434,10 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <input id="qrUrlInput" type="text" readonly class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-85 select-all" />
-        <button onclick="copyQrUrl()" class="px-3 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
+        <input id="qrUrlInput" type="text" readonly
+          class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-85 select-all" />
+        <button onclick="copyQrUrl()"
+          class="px-3 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
           Kopieren
         </button>
       </div>
@@ -379,15 +473,16 @@
         icon: "📸",
         language: "Dart",
         badgeColor: "bg-pink-500/20 text-pink-500 border-pink-500/30",
-        shortDesc: "Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web.",
-        fullDesc: "PhotoKids Studio ist eine vollwertige, kinderleichte Foto- und Bildbearbeitungs-App mit spielerischem Material Design 3. Sie bietet ein sicheres Studio zum Malen, Dekorieren und Verwalten von Familienfotos ohne Werbebanner oder Online-Zwang.",
+        shortDesc: "Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web mit KI-Zauberpinsel.",
+        fullDesc: "PhotoKids Studio ist eine vollwertige, kinderleichte Foto- und Bildbearbeitungs-App mit spielerischem Material Design 3. Sie bietet einen kostenlosen KI-Zauberpinsel für Sprache & Text, ein sicheres Studio zum Malen und Dekorieren sowie das Verwalten von Familienfotos ohne Werbebanner oder Online-Zwang.",
         highlights: [
-          "Studio-Editor mit Zauberstiften, kindgerechten Stickern und Fotokarten",
+          "🪄 Kostenloser KI Zauber-Pinsel: Kinder zaubern eigene Bilder per Text- und Spracheingabe (Pollinations AI)",
+          "Studio-Editor mit Zauberstiften, Vorher/Nachher-Slider, Malbuch-Modus und Fotokarten",
           "Automatisches Album-Management & animierte Vollbild-Diashow",
           "Eltern-Bereich gesichert durch Mathe-Aufgabe & PIN-Code",
           "Plattformunabhängig: Läuft nativ auf Android, iOS & als WebAssembly im Browser"
         ],
-        tech: ["Flutter 3", "Dart", "Riverpod 2", "SQLite (WASM/FFI)", "CanvasKit", "Clean Architecture"],
+        tech: ["Flutter 3", "Dart", "Riverpod 2", "KI Bildgenerierung (Flux/Turbo)", "SQLite (WASM/FFI)", "CanvasKit", "Clean Architecture"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/PhotoKids-Studio",
         liveUrl: "https://roberthoferzuerich-alt.github.io/PhotoKids-Studio/",
         directApkUrl: "https://github.com/roberthoferzuerich-alt/PhotoKids-Studio/releases/download/v1.0.1/app-release.apk"
@@ -699,9 +794,9 @@
 
       const filtered = repositories.filter(repo => {
         const matchesCategory = currentFilter === 'all' || repo.category === currentFilter;
-        const matchesSearch = repo.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                              repo.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                              repo.language.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch = repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          repo.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          repo.language.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
       });
 
@@ -913,8 +1008,8 @@
       const isApk = !!currentModalRepo.directApkUrl;
       const url = currentModalRepo.directApkUrl || currentModalRepo.liveUrl || `https://github.com/roberthoferzuerich-alt/${currentModalRepo.id}/releases`;
       const title = `${currentModalRepo.name} 📲`;
-      const subtitle = isApk 
-        ? 'Scanne diesen Code mit deinem Smartphone für den direkten APK-Download (v1.0.0, 62.8 MB):' 
+      const subtitle = isApk
+        ? 'Scanne diesen Code mit deinem Smartphone für den direkten APK-Download (v1.0.0, 62.8 MB):'
         : (currentModalRepo.liveUrl ? 'Scanne den Code, um die Web-App direkt auf dem Handy zu öffnen:' : 'Scanne den Code für die Release-Dateien:');
       openQrModal('project', url, title, subtitle);
     }
@@ -942,4 +1037,5 @@
     initTheme();
   </script>
 </body>
+
 </html>

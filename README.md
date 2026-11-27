@@ -10,7 +10,7 @@
 
 ### 💙 Flutter & Mobile / Web
 * **[Suisse Radio](https://github.com/roberthoferzuerich-alt/Suisse-Radio)** – Umfassende Schweizer Radio-Streaming-App für Android und iOS. Live-Streaming aller Schweizer Sender (SRF, RTS, RSI, Lokalsender), interaktive Playlists mit Drag & Drop Reordering, Hi-Fi Streaming- & Export-Studio (MP3 320k, FLAC, AAC, WAV, M3U8, PLS), animierter Audio-Equalizer und modernes Material Design 3.
-* **[PhotoKids Studio](https://github.com/roberthoferzuerich-alt/PhotoKids-Studio)** – Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web. Inklusive Studio-Editor, Alben, Diashow, Sticker-System und PIN-geschütztem Elternmodus. *(Live Demo verfügbar)*
+* **[PhotoKids Studio](https://github.com/roberthoferzuerich-alt/PhotoKids-Studio)** – Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web. Inklusive kostenlosem **KI Zauber-Pinsel** (Bilder per Sprache & Text herzaubern), Studio-Editor mit Malbuch & Bilderrahmen, Alben, Diashow, Grußkarten und PIN-geschütztem Elternmodus. *(Live Demo verfügbar)*
 * **[chatconnect-app](https://github.com/roberthoferzuerich-alt/chatconnect-app)** – Reaktive Mobile Chat-Applikation für das ChatConnect-Kommunikationsnetzwerk.
 * **[EasyQuill](https://github.com/roberthoferzuerich-alt/EasyQuill)** – Eleganter Rich-Text Editor und Notizblock für fokussiertes Schreiben.
 * **[resizer](https://github.com/roberthoferzuerich-alt/resizer)** – Client-Side Web-App zum Skalieren, Zuschneiden und Bearbeiten von Bildern direkt im Browser.
