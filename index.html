@@ -2,20 +2,71 @@
 <html lang="de" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robert Hofer – GitHub Repositories Showcase</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#120E1C" id="themeColorMeta">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Robert Hofer Portfolio">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="Robert Hofer – Portfolio & Repositories Showcase: Moderne Flutter Mobile/Web Apps, Laravel Backend & Tools">
+  <title>Robert Hofer – GitHub Repositories Showcase 🚀🇨🇭</title>
+  
+  <!-- Tailwind CSS CDN with dark mode config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '420px',
+          }
+        }
+      }
+    };
+  </script>
   <style>
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      padding-top: max(0.75rem, var(--sat));
+      padding-bottom: max(2.5rem, calc(var(--sab) + 2rem));
+      padding-left: max(0.75rem, var(--sal));
+      padding-right: max(0.75rem, var(--sar));
+      touch-action: manipulation;
+    }
+
     @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.03); }
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.04); }
     }
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes toastFade {
+      0% { opacity: 0; transform: translate(-50%, 20px) scale(0.92); }
+      15% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+      85% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -10px) scale(0.96); }
+    }
+
     .animate-fadeInUp {
-      animation: fadeInUp 0.4s ease-out forwards;
+      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     /* Dark Theme Styles (Default) */
@@ -24,21 +75,55 @@
       color: #f1f5f9;
     }
     body.dark .ambient-glow {
-      background: linear-gradient(to right, rgba(255, 82, 119, 0.2), rgba(156, 39, 176, 0.2), rgba(0, 196, 180, 0.2));
+      background: radial-gradient(circle at 50% 20%, rgba(255, 82, 119, 0.22) 0%, rgba(156, 39, 176, 0.18) 45%, rgba(0, 196, 180, 0.12) 75%, transparent 100%);
     }
     body.dark .glass-card {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
     }
     body.dark .glass-card:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 82, 119, 0.4);
-      box-shadow: 0 16px 32px -8px rgba(255, 82, 119, 0.25);
+      box-shadow: 0 16px 36px -8px rgba(255, 82, 119, 0.22);
     }
     body.dark .modal-inner {
-      background-color: #1C162A;
-      border-color: rgba(255, 255, 255, 0.15);
+      background-color: #191426;
+      border-color: rgba(255, 255, 255, 0.12);
       color: #f1f5f9;
+    }
+    body.dark .search-box {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #f1f5f9;
+    }
+    body.dark .search-box:focus {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: #FF5277;
+    }
+    body.dark .filter-unselected {
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    body.dark .filter-unselected:hover,
+    body.dark .filter-unselected:active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f1f5f9;
+    }
+    body.dark .modal-badge {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    body.dark .modal-close {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+    }
+    body.dark .modal-close:hover,
+    body.dark .modal-close:active {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
     }
 
     /* Light Theme Styles */
@@ -47,21 +132,20 @@
       color: #1e293b;
     }
     body.light .ambient-glow {
-      background: linear-gradient(to right, rgba(255, 82, 119, 0.12), rgba(156, 39, 176, 0.08), rgba(0, 196, 180, 0.12));
+      background: radial-gradient(circle at 50% 20%, rgba(255, 82, 119, 0.14) 0%, rgba(156, 39, 176, 0.09) 45%, rgba(0, 196, 180, 0.12) 75%, transparent 100%);
     }
     body.light .glass-card {
       background: #FFFFFF;
-      border-color: rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.07);
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
     }
     body.light .glass-card:hover {
-      transform: translateY(-5px);
       background: #FFFFFF;
-      border-color: rgba(255, 82, 119, 0.5);
-      box-shadow: 0 16px 32px -6px rgba(255, 82, 119, 0.2);
+      border-color: rgba(255, 82, 119, 0.45);
+      box-shadow: 0 16px 32px -6px rgba(255, 82, 119, 0.18);
     }
     body.light .text-gradient-header {
-      background: linear-gradient(to right, #1e293b, #334155, #be185d);
+      background: linear-gradient(135deg, #0f172a 0%, #334155 40%, #be185d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -84,6 +168,10 @@
       color: #0f172a;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
+    body.light .search-box:focus {
+      background: #FFFFFF;
+      border-color: #FF5277;
+    }
     body.light .search-box::placeholder {
       color: #94a3b8;
     }
@@ -92,14 +180,16 @@
       color: #475569;
       border: 1px solid #E2E8F0;
     }
-    body.light .filter-unselected:hover {
+    body.light .filter-unselected:hover,
+    body.light .filter-unselected:active {
       background: #F1F5F9;
+      color: #0f172a;
     }
     body.light .modal-inner {
       background-color: #FFFFFF;
       border-color: #E2E8F0;
       color: #0f172a;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22);
     }
     body.light .modal-desc {
       color: #475569;
@@ -113,7 +203,8 @@
       background: #F1F5F9;
       color: #64748b;
     }
-    body.light .modal-close:hover {
+    body.light .modal-close:hover,
+    body.light .modal-close:active {
       background: #E2E8F0;
       color: #0f172a;
     }
@@ -121,234 +212,389 @@
     .glass-card {
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
     }
+
+    /* Active touch feedback for mobile & tablet */
+    .touch-press {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .touch-press:active {
+      transform: scale(0.965);
+    }
+    .card-touch:active {
+      transform: scale(0.985);
+    }
+
     .modal-backdrop {
-      background: rgba(15, 12, 25, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(10, 8, 18, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    ::-webkit-scrollbar {
-      width: 8px;
+
+    /* Scrollbar styling */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 82, 119, 0.3);
-      border-radius: 4px;
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 82, 119, 0.35);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Responsive Sheet / Modal Behavior */
+    @media (max-width: 639px) {
+      .modal-wrapper {
+        align-items: flex-end !important;
+        padding: 0 !important;
+      }
+      .modal-box-responsive {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-top-left-radius: 2rem !important;
+        border-top-right-radius: 2rem !important;
+        max-height: 86vh !important;
+        width: 100% !important;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .modal-box-responsive.sheet-visible {
+        transform: translateY(0) !important;
+      }
+      .qr-box-responsive {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-top-left-radius: 2rem !important;
+        border-top-right-radius: 2rem !important;
+        width: 100% !important;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .qr-box-responsive.sheet-visible {
+        transform: translateY(0) !important;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .modal-box-responsive {
+        transform: scale(0.95);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        max-height: 90vh;
+      }
+      .modal-box-responsive.sheet-visible {
+        transform: scale(1) !important;
+      }
+      .qr-box-responsive {
+        transform: scale(0.95);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .qr-box-responsive.sheet-visible {
+        transform: scale(1) !important;
+      }
     }
   </style>
 </head>
-<body id="appBody" class="dark min-h-screen font-sans selection:bg-[#FF5277] selection:text-white pb-16 transition-colors duration-300">
+<body id="appBody" class="dark min-h-screen font-sans selection:bg-[#FF5277] selection:text-white transition-colors duration-300 relative">
 
   <!-- Top Ambient Glow -->
-  <div class="ambient-glow fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] blur-[120px] pointer-events-none -z-10 transition-all duration-500"></div>
+  <div class="ambient-glow fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[340px] blur-[100px] pointer-events-none -z-10 transition-all duration-500"></div>
 
   <!-- Header Section -->
-  <header class="max-w-6xl mx-auto pt-8 pb-6 px-4 sm:px-6">
+  <header class="max-w-6xl mx-auto pt-2 sm:pt-6 pb-4 sm:pb-6 px-3 sm:px-6">
     
-    <!-- Top Bar with Profile Badge & Dark Mode Button -->
-    <div class="flex items-center justify-between gap-3 mb-6">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-pink-500 animate-fadeInUp shadow-sm">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>Robert Hofer • Zürich 🇨🇭</span>
-        <span class="opacity-40">•</span>
-        <span>GitHub Showcase</span>
+    <!-- Top Bar with Profile Badge & Quick Action Buttons -->
+    <div class="flex items-center justify-between gap-2 mb-4 sm:mb-6">
+      
+      <!-- Developer Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-pink-500 animate-fadeInUp shadow-sm max-w-[210px] sm:max-w-none truncate">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
+        <span class="truncate">Robert Hofer • Zürich 🇨🇭</span>
+        <span class="hidden sm:inline opacity-40">•</span>
+        <span class="hidden sm:inline opacity-90">Open Source Showcase</span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <!-- QR Code for Portfolio on Phone -->
+      <!-- Action Buttons: Share & Dark Mode Toggle -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Share / QR Button -->
         <button 
-          onclick="openQrModal('portfolio')" 
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
-          title="Portfolio auf dem Smartphone öffnen per QR-Code"
+          id="shareBtn"
+          onclick="handleShareOrQr()" 
+          class="touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-inherit"
+          title="Portfolio teilen oder QR-Code scannen"
         >
-          <span class="text-base">📱</span>
-          <span class="hidden sm:inline">Handy QR-Code</span>
+          <span class="text-sm sm:text-base">📲</span>
+          <span class="hidden xs:inline sm:inline">Teilen</span>
         </button>
 
         <!-- Dark Mode / Light Mode Switch Button -->
         <button 
           id="themeToggleBtn" 
           onclick="toggleTheme()" 
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 transform active:scale-95 text-inherit"
+          class="touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-inherit"
           title="Zwischen Dark Mode und Light Mode wechseln"
         >
-          <span id="themeIcon" class="text-base">🌙</span>
-          <span id="themeText">Dark Mode</span>
+          <span id="themeIcon" class="text-sm sm:text-base">🌙</span>
+          <span id="themeText" class="hidden sm:inline">Dark</span>
         </button>
       </div>
     </div>
 
+    <!-- Main Hero Headline -->
     <div class="text-center">
-      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-gradient-header bg-gradient-to-r from-white via-slate-100 to-pink-300 bg-clip-text text-transparent mb-3 animate-fadeInUp">
-        Meine Open-Source Repositories 🚀
+      <div class="inline-block mb-2">
+        <span class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-teal-500/20 border border-pink-500/30 text-pink-400">
+          Mobile • Web • Backend • Tools
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-gradient-header bg-gradient-to-r from-white via-slate-100 to-pink-300 bg-clip-text text-transparent mb-2.5 animate-fadeInUp leading-tight">
+        Robert Hofer – Portfolio Showcase 🚀
       </h1>
-      <p class="header-subtitle text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 animate-fadeInUp">
-        Entdecke alle 17 Projekte von Robert Hofer – von modernen Flutter-Apps für Kinder und Kreative bis hin zu performanten Backend- und IoT-Lösungen. Klicke auf ein Projekt für alle Details.
+      <p class="header-subtitle text-xs sm:text-sm md:text-base text-slate-400 max-w-2xl mx-auto mb-5 sm:mb-6 animate-fadeInUp leading-relaxed px-2">
+        17 kuratierte Projekte: Moderne Schweizer Radio- & Foto-Apps in Flutter, reaktive Mobile Chat-Lösungen, sichere Laravel-APIs und smarte Developer-Tools.
       </p>
 
+      <!-- Quick Interactive Stats Bar (Mobile & Tablet Friendly) -->
+      <div class="flex items-center justify-center gap-1.5 sm:gap-2.5 mb-5 overflow-x-auto no-scrollbar py-1 px-1 text-xs">
+        <button onclick="setFilter('all')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+          <span>17 Projekte</span>
+        </button>
+        <button onclick="setFilter('flutter')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+          <span>8 Flutter Apps</span>
+        </button>
+        <button onclick="setFilter('php')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+          <span>6 Backend</span>
+        </button>
+        <button onclick="setFilter('other')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span>3 Tools</span>
+        </button>
+      </div>
+
       <!-- Search & Filter Controls -->
-      <div class="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 items-center justify-between mb-8">
-        <!-- Search Input -->
-        <div class="relative w-full sm:w-80">
+      <div class="max-w-3xl mx-auto flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-4 sm:mb-8">
+        
+        <!-- Live Search Bar -->
+        <div class="relative flex-1">
           <input 
-            type="text" 
+            type="search" 
             id="searchInput" 
-            placeholder="Repository suchen (z.B. PhotoKids, Piano)..."
-            class="search-box w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/20 text-sm text-inherit placeholder-slate-400 transition-all"
+            placeholder="Projekt suchen (z.B. Suisse Radio, PhotoKids)..."
+            class="search-box w-full pl-10 pr-9 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm text-inherit placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500/30 transition-all border"
+            autocomplete="off"
+            spellcheck="false"
           />
-          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3 sm:top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
+          <button 
+            id="clearSearchBtn" 
+            onclick="clearSearch()" 
+            class="hidden absolute right-3 top-2.5 sm:top-3 p-1 rounded-full text-slate-400 hover:text-white transition-colors"
+            title="Suche zurücksetzen"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
         </div>
 
-        <!-- Category Filter Pills -->
-        <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1" id="filterContainer">
-          <button onclick="setFilter('all')" class="filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/25" data-filter="all">Alle (17)</button>
-          <button onclick="setFilter('flutter')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="flutter">Flutter 💙</button>
-          <button onclick="setFilter('php')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="php">PHP/Laravel 🐘</button>
-          <button onclick="setFilter('other')" class="filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white/5 text-slate-300 hover:bg-white/10" data-filter="other">Java & Tools ⚙️</button>
+        <!-- Filter Pills with Native-Style Horizontal Scrolling -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0" id="filterContainer">
+          <button onclick="setFilter('all')" class="touch-press filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-md shadow-pink-500/25 whitespace-nowrap" data-filter="all">Alle (17)</button>
+          <button onclick="setFilter('flutter')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="flutter">Flutter 💙 (8)</button>
+          <button onclick="setFilter('php')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="php">PHP/Laravel 🐘 (6)</button>
+          <button onclick="setFilter('other')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="other">Java & Tools ⚙️ (3)</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Repository Grid -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div id="repoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <!-- Repository Grid: 1 col on mobile, 2 cols on tablet, 3 cols on desktop -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-6">
+    <div id="repoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
       <!-- Injected via JavaScript -->
     </div>
 
     <!-- Empty State -->
-    <div id="emptyState" class="hidden text-center py-16">
-      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 flex items-center justify-center text-3xl">🔍</div>
-      <h3 class="text-lg font-bold text-slate-300">Keine Repositories gefunden</h3>
-      <p class="text-sm text-slate-500">Versuche einen anderen Suchbegriff oder Filter.</p>
+    <div id="emptyState" class="hidden text-center py-16 px-4">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl">🔍</div>
+      <h3 class="text-base sm:text-lg font-bold text-slate-300 mb-1">Kein Repository gefunden</h3>
+      <p class="text-xs sm:text-sm text-slate-500 mb-4">Versuche einen anderen Suchbegriff oder wechsle den Filter.</p>
+      <button onclick="resetFilters()" class="touch-press px-4 py-2 rounded-xl bg-pink-500 text-white text-xs font-bold shadow-md">Filter zurücksetzen</button>
     </div>
   </main>
 
-  <!-- Detail Modal -->
-  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="modalBox" class="modal-inner border w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 overflow-hidden relative">
+  <!-- Detail Modal / Bottom Sheet (Sliding Sheet on Phones, Centered Dialog on Tablets & Desktop) -->
+  <div id="detailModal" class="modal-wrapper fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
+    <div id="modalBox" class="modal-box-responsive modal-inner border w-full max-w-xl rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden relative flex flex-col">
       
+      <!-- Drag handle indicator for mobile phones -->
+      <div class="w-12 h-1.5 rounded-full bg-slate-400/30 mx-auto mb-3 sm:hidden cursor-pointer shrink-0" onclick="closeModal()"></div>
+
       <!-- Close Button -->
-      <button onclick="closeModal()" class="modal-close absolute top-5 right-5 p-2 rounded-full transition-colors">
+      <button onclick="closeModal()" class="modal-close absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-full transition-colors z-10" aria-label="Schließen">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
-      <!-- Modal Content Header -->
-      <div class="flex items-start gap-4 mb-5">
-        <div id="modalIcon" class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 bg-pink-500/20 text-pink-400 border border-pink-500/30">
-          📁
-        </div>
-        <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span id="modalLanguage" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">Dart</span>
-            <span id="modalCategory" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/5 text-slate-400 border border-white/10">Mobile & Web</span>
-          </div>
-          <h2 id="modalTitle" class="text-2xl font-extrabold">Repository Name</h2>
-        </div>
-      </div>
-
-      <!-- Description -->
-      <p id="modalDescription" class="modal-desc text-sm sm:text-base leading-relaxed mb-6">
-        Beschreibung des Repositories...
-      </p>
-
-      <!-- Features / Highlights -->
-      <div class="mb-6">
-        <h4 class="text-xs uppercase tracking-wider text-pink-500 font-bold mb-3 flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-          Highlights & Architektur
-        </h4>
-        <ul id="modalHighlights" class="space-y-2 text-xs sm:text-sm">
-          <!-- Injected via JS -->
-        </ul>
-      </div>
-
-      <!-- Tech Stack Badges -->
-      <div class="mb-6">
-        <h4 class="text-xs uppercase tracking-wider opacity-60 font-bold mb-2.5">Technologie-Stack</h4>
-        <div id="modalTech" class="flex flex-wrap gap-1.5">
-          <!-- Injected via JS -->
-        </div>
-      </div>
-
-      <!-- Release & Download Actions for Flutter & Apps -->
-      <div id="modalDownloadSection" class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
-            📦
+      <!-- Scrollable Modal Content Container -->
+      <div class="overflow-y-auto overscroll-contain pr-1 custom-scrollbar flex-1 pb-2">
+        <!-- Modal Content Header -->
+        <div class="flex items-start gap-3.5 mb-4 pr-8">
+          <div id="modalIcon" class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shrink-0 bg-pink-500/20 text-pink-400 border border-pink-500/30">
+            📁
           </div>
           <div>
-            <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">Release & Download</h4>
-            <p class="text-xs opacity-75">Installations- und Paketdateien für dieses Projekt</p>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span id="modalLanguage" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Dart</span>
+              <span id="modalCategory" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/5 text-slate-400 border border-white/10">Mobile & Web</span>
+            </div>
+            <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">Repository Name</h2>
           </div>
         </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto flex-wrap">
-          <a id="modalWebBtn" href="#" target="_blank" class="hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-            <span>🌐 WebApp öffnen</span>
-          </a>
-          <a id="modalReleaseBtn" href="#" target="_blank" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            <span>Release (.apk)</span>
-          </a>
-          <a id="modalZipBtn" href="#" target="_blank" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all" title="Quellcode als ZIP herunterladen">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span>Code (.zip)</span>
-          </a>
-          <button id="modalQrBtn" onclick="openCurrentProjectQr()" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="QR-Code zum Scannen mit dem Smartphone">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-            <span>QR-Code</span>
-          </button>
+
+        <!-- Description -->
+        <p id="modalDescription" class="modal-desc text-xs sm:text-sm leading-relaxed mb-5">
+          Beschreibung des Repositories...
+        </p>
+
+        <!-- Features / Highlights -->
+        <div class="mb-5">
+          <h4 class="text-xs uppercase tracking-wider text-pink-500 font-bold mb-2.5 flex items-center gap-1.5">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Highlights & Architektur
+          </h4>
+          <ul id="modalHighlights" class="space-y-2 text-xs sm:text-sm">
+            <!-- Injected via JS -->
+          </ul>
+        </div>
+
+        <!-- Tech Stack Badges -->
+        <div class="mb-5">
+          <h4 class="text-xs uppercase tracking-wider opacity-60 font-bold mb-2">Technologie-Stack</h4>
+          <div id="modalTech" class="flex flex-wrap gap-1.5">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Release & Download Actions for Flutter & Apps -->
+        <div id="modalDownloadSection" class="mb-4 p-3.5 sm:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0">
+              📦
+            </div>
+            <div>
+              <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">App-Downloads & Releases</h4>
+              <p class="text-[11px] opacity-75">Installations- und Paketdateien für dieses Projekt</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-2 w-full flex-wrap pt-1">
+            <a id="modalWebBtn" href="#" target="_blank" class="touch-press hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              <span>🌐 WebApp öffnen</span>
+            </a>
+            <a id="modalReleaseBtn" href="#" target="_blank" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Release (.apk)</span>
+            </a>
+            <a id="modalZipBtn" href="#" target="_blank" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="Quellcode als ZIP herunterladen">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>Code (.zip)</span>
+            </a>
+            <button id="modalQrBtn" onclick="openCurrentProjectQr()" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="QR-Code zum Scannen oder Teilen">
+              <span class="text-xs">📲</span>
+              <span>Teilen</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/10 dark:border-white/10 border-slate-200">
-        <a id="modalBrowserLink" href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-sm shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all">
+      <!-- Action Buttons Footer -->
+      <div class="flex flex-col sm:flex-row gap-2.5 pt-3 border-t border-white/10 dark:border-white/10 border-slate-200 shrink-0">
+        <a id="modalBrowserLink" href="#" target="_blank" class="touch-press flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-xs sm:text-sm shadow-md shadow-pink-500/25 hover:opacity-95 transition-all">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           <span>Auf GitHub ansehen</span>
         </a>
-        <a id="modalLiveDemo" href="#" target="_blank" class="hidden flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-sm shadow-lg shadow-teal-500/25 hover:opacity-95 transition-all">
+        <a id="modalLiveDemo" href="#" target="_blank" class="touch-press hidden flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-xs sm:text-sm shadow-md shadow-teal-500/25 hover:opacity-95 transition-all">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span>Live Demo im Web</span>
+          <span>Live Demo öffnen 🚀</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- QR Code Modal -->
-  <div id="qrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="qrModalBox" class="modal-inner border w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300 text-center relative">
+  <!-- QR Code & Share Modal -->
+  <div id="qrModal" class="modal-wrapper fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
+    <div id="qrModalBox" class="qr-box-responsive modal-inner border w-full max-w-sm rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl text-center relative">
       
-      <button onclick="closeQrModal()" class="modal-close absolute top-4 right-4 p-2 rounded-full transition-colors">
+      <!-- Drag handle indicator for mobile phones -->
+      <div class="w-12 h-1.5 rounded-full bg-slate-400/30 mx-auto mb-3 sm:hidden cursor-pointer" onclick="closeQrModal()"></div>
+
+      <button onclick="closeQrModal()" class="modal-close absolute top-4 right-4 p-2 rounded-full transition-colors" aria-label="Schließen">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
-      <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
+      <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
         📱
       </div>
 
-      <h3 id="qrModalTitle" class="text-xl font-extrabold mb-1">Am Smartphone öffnen</h3>
-      <p id="qrModalSubtitle" class="text-xs opacity-75 mb-4">Halte deine Smartphone-Kamera auf diesen Code:</p>
+      <h3 id="qrModalTitle" class="text-lg font-extrabold mb-1">Auf Smartphone aufrufen</h3>
+      <p id="qrModalSubtitle" class="text-xs opacity-75 mb-3.5">Scanne den QR-Code oder teile den Direktlink:</p>
 
       <!-- QR Image Container -->
-      <div class="bg-white p-3.5 rounded-2xl inline-block shadow-md border border-slate-200 mb-4">
-        <img id="qrCodeImage" src="" alt="QR Code" class="w-52 h-52 block mx-auto object-contain" />
+      <div class="bg-white p-3 rounded-2xl inline-block shadow-md border border-slate-200 mb-3.5">
+        <img id="qrCodeImage" src="" alt="QR Code" class="w-48 h-48 block mx-auto object-contain" />
       </div>
 
-      <div class="flex items-center gap-2">
-        <input id="qrUrlInput" type="text" readonly class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-85 select-all" />
-        <button onclick="copyQrUrl()" class="px-3 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
+      <div class="flex items-center gap-2 mb-2">
+        <input id="qrUrlInput" type="text" readonly class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-90 select-all" />
+        <button onclick="copyQrUrl()" class="touch-press px-3.5 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
           Kopieren
         </button>
       </div>
+
+      <!-- Native Share Button if supported -->
+      <button id="nativeShareBtn" onclick="triggerNativeShare()" class="touch-press hidden w-full py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-xs font-bold shadow-md transition-all">
+        📤 Über Smartphone teilen (WhatsApp, AirDrop, etc.)
+      </button>
     </div>
   </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div class="px-4 py-2.5 rounded-2xl bg-slate-900/90 text-white text-xs sm:text-sm font-semibold border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2">
+      <span id="toastIcon">📋</span>
+      <span id="toastMessage">In die Zwischenablage kopiert!</span>
+    </div>
+  </div>
+
+  <!-- Floating Back-to-Top Button -->
+  <button 
+    id="backToTopBtn" 
+    onclick="scrollToTop()" 
+    class="touch-press fixed bottom-5 right-4 sm:right-6 z-40 p-3 rounded-2xl bg-pink-500 text-white shadow-xl shadow-pink-500/30 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4"
+    aria-label="Nach oben scrollen"
+    title="Nach oben scrollen"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+  </button>
 
   <script>
     // Repository Data for Robert Hofer (Zürich)
@@ -359,7 +605,7 @@
         category: "flutter",
         icon: "📻",
         language: "Dart",
-        badgeColor: "bg-red-500/20 text-red-500 border-red-500/30",
+        badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
         shortDesc: "Moderne Schweizer Radio-Streaming-App mit Playlists, High-End Audio-Export und Equalizer.",
         fullDesc: "Suisse Radio ist eine elegante Flutter-App zum Empfang und Genuss aller Schweizer Radiosender (SRF 1/2/3, RTS, RSI, Pop, Lokalsender). Sie bietet Live-Streaming mit Hintergrundwiedergabe, interaktive Playlists mit Reordering, ein Hi-Fi Export-Studio für Mitschnitte & Playlists sowie ein modernes Material 3 Interface.",
         highlights: [
@@ -378,8 +624,8 @@
         category: "flutter",
         icon: "📸",
         language: "Dart",
-        badgeColor: "bg-pink-500/20 text-pink-500 border-pink-500/30",
-        shortDesc: "Moderne, kindgerechte und sichere Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web mit KI-Zauberpinsel.",
+        badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30",
+        shortDesc: "Moderne, kindgerechte Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web mit KI-Zauberpinsel.",
         fullDesc: "PhotoKids Studio ist eine vollwertige, kinderleichte Foto- und Bildbearbeitungs-App mit spielerischem Material Design 3. Sie bietet einen kostenlosen KI-Zauberpinsel für Sprache & Text, ein sicheres Studio zum Malen und Dekorieren sowie das Verwalten von Familienfotos ohne Werbebanner oder Online-Zwang.",
         highlights: [
           "🪄 Kostenloser KI Zauber-Pinsel: Kinder zaubern eigene Bilder per Text- und Spracheingabe (Pollinations AI)",
@@ -399,7 +645,7 @@
         category: "flutter",
         icon: "💬",
         language: "Dart",
-        badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
+        badgeColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
         shortDesc: "Moderne Mobile Chat-Applikation für das ChatConnect-Kommunikationsnetzwerk.",
         fullDesc: "Reaktive Mobile-App für plattformübergreifenden Echtzeitaustausch. Konzipiert für zuverlässige Kommunikation, intuitive Chat-Navigation, Medienversand und WebRTC-Videoanrufe.",
         highlights: [
@@ -418,7 +664,7 @@
         category: "php",
         icon: "⚡",
         language: "PHP / Laravel",
-        badgeColor: "bg-purple-500/20 text-purple-500 border-purple-500/30",
+        badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30",
         shortDesc: "Leistungsstarkes Backend, WebApp & REST/WebSocket-API für ChatConnect.",
         fullDesc: "Zentraler Laravel-Serverdienst auf Raspberry Pi & Cloud. Bietet Authentifizierung, WebSocket-Echtzeitkommunikation, WebRTC-Calls, Statusanzeigen, 3D-STL-Streaming und die vollständige WebApp.",
         highlights: [
@@ -455,7 +701,7 @@
         category: "flutter",
         icon: "🖋️",
         language: "Dart",
-        badgeColor: "bg-teal-500/20 text-teal-500 border-teal-500/30",
+        badgeColor: "bg-teal-500/20 text-teal-400 border-teal-500/30",
         shortDesc: "Schlanker Rich-Text Editor und Notizblock für fokussiertes Schreiben.",
         fullDesc: "Eine elegante Notiz- und Schreib-App, die das Erstellen formatierter Texte, Listen und Notizen mit maximaler Übersichtlichkeit und Schnelligkeit ermöglicht.",
         highlights: [
@@ -472,7 +718,7 @@
         category: "flutter",
         icon: "📐",
         language: "Dart",
-        badgeColor: "bg-indigo-500/20 text-indigo-500 border-indigo-500/30",
+        badgeColor: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
         shortDesc: "Flutter Web-App zum Skalieren, Zuschneiden und Bearbeiten von Bildern direkt im Browser.",
         fullDesc: "Praktisches Client-Side Bildbearbeitungstool. Bilder werden direkt lokal im Browser skaliert, formatiert und zugeschnitten, ohne sensible Bilddaten an externe Server übertragen zu müssen.",
         highlights: [
@@ -489,7 +735,7 @@
         category: "flutter",
         icon: "🥗",
         language: "Dart",
-        badgeColor: "bg-emerald-500/20 text-emerald-500 border-emerald-500/30",
+        badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
         shortDesc: "Gesundheits- & Ernährungs-App zur Erfassung und Auswertung von Nährwert-Punkten.",
         fullDesc: "Begleitet Nutzer auf dem Weg zu gesunder Ernährung. Erfasst Mahlzeiten, berechnet Nährstoff-Scores und visualisiert den täglichen Fortschritt in motivierenden Grafiken.",
         highlights: [
@@ -506,7 +752,7 @@
         category: "flutter",
         icon: "🎹",
         language: "Dart",
-        badgeColor: "bg-amber-500/20 text-amber-500 border-amber-500/30",
+        badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30",
         shortDesc: "Interaktive Klavier- und Musik-App mit virtueller Klaviatur und Soundausgabe.",
         fullDesc: "Eine fröhliche, interaktive Klavier-Anwendung für Kinder und Musikbegeisterte mit sofortigem Audio-Feedback und optischer Tastenanimation.",
         highlights: [
@@ -523,7 +769,7 @@
         category: "flutter",
         icon: "📄",
         language: "Dart",
-        badgeColor: "bg-rose-500/20 text-rose-500 border-rose-500/30",
+        badgeColor: "bg-rose-500/20 text-rose-400 border-rose-500/30",
         shortDesc: "Markdown-zu-PDF Konverter mit Live-Vorschau und professionellem Layout.",
         fullDesc: "Wandelt strukturierte Markdown-Dokumente blitzschnell in saubere, druckfertige PDF-Dateien um. Perfekt für Dokumentationen, Rechnungen und Protokolle.",
         highlights: [
@@ -540,7 +786,7 @@
         category: "php",
         icon: "📅",
         language: "PHP / Blade",
-        badgeColor: "bg-yellow-500/20 text-yellow-600 border-yellow-500/30",
+        badgeColor: "bg-yellow-500/20 text-yellow-500 border-yellow-500/30",
         shortDesc: "Termin-Finder und Umfrage-Tool ähnlich wie Doodle zur einfachen Terminabstimmung.",
         fullDesc: "Eine schlanke Schweizer Alternative zu Doodle für Freunde, Vereine und Teams. Erstelle Terminumfragen ohne Benutzerkonto und finde im Handumdrehen das passende Datum.",
         highlights: [
@@ -557,7 +803,7 @@
         category: "php",
         icon: "🍲",
         language: "PHP",
-        badgeColor: "bg-orange-500/20 text-orange-500 border-orange-500/30",
+        badgeColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
         shortDesc: "Digitale Rezeptsammlung zum Organisieren, Kochen und Entdecken von Lieblingsrezepten.",
         fullDesc: "Das digitale Familien-Kochbuch: Rezepte übersichtlich speichern, Zutatenmengen anpassen und Schritt-für-Schritt leckere Mahlzeiten zubereiten.",
         highlights: [
@@ -574,7 +820,7 @@
         category: "other",
         icon: "✉️",
         language: "Python / Flutter",
-        badgeColor: "bg-sky-500/20 text-sky-500 border-sky-500/30",
+        badgeColor: "bg-sky-500/20 text-sky-400 border-sky-500/30",
         shortDesc: "Moderner E-Mail-App-Klon mit intuitiver Benutzeroberfläche und Mail-Verwaltung.",
         fullDesc: "Konzeptioneller Nachbau eines modernen Mail-Clients mit Fokus auf intuitive Ordner-Strukturen, schnelle Suche und übersichtliches Threading.",
         highlights: [
@@ -591,7 +837,7 @@
         category: "php",
         icon: "📬",
         language: "PHP",
-        badgeColor: "bg-violet-500/20 text-violet-500 border-violet-500/30",
+        badgeColor: "bg-violet-500/20 text-violet-400 border-violet-500/30",
         shortDesc: "Backend-Dienste und Server-Schnittstellen für die Mail-Clone Applikation.",
         fullDesc: "Stellt Verbindung zu Mailservern her, verwaltet Zugangsdaten sicher und liefert formatierte Maildaten an das Frontend aus.",
         highlights: [
@@ -608,7 +854,7 @@
         category: "php",
         icon: "🍓",
         language: "PHP / Blade",
-        badgeColor: "bg-red-500/20 text-red-500 border-red-500/30",
+        badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
         shortDesc: "Automatisches Deployment- und Verwaltungstool für Raspberry Pi Einplatinencomputer.",
         fullDesc: "Erleichtert das Ausrollen und Verwalten von Web-Apps und Skripten auf Raspberry Pi Geräten über ein einfaches Web-Dashboard.",
         highlights: [
@@ -625,7 +871,7 @@
         category: "php",
         icon: "🔬",
         language: "PHP",
-        badgeColor: "bg-pink-500/20 text-pink-500 border-pink-500/30",
+        badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30",
         shortDesc: "Demo Laravel-Applikation zum Testen und Validieren der pi-deployer Pipeline.",
         fullDesc: "Testumgebung mit Health-Checks und Status-Endpunkten, um automatisierte Aktualisierungen über den pi-deployer zuverlässig zu erproben.",
         highlights: [
@@ -642,7 +888,7 @@
         category: "other",
         icon: "🧊",
         language: "Java",
-        badgeColor: "bg-red-600/20 text-red-500 border-red-600/30",
+        badgeColor: "bg-rose-600/20 text-rose-400 border-rose-600/30",
         shortDesc: "3D-Viewer zur Betrachtung und Analyse von STL-Dateien (3D-Druck / CAD).",
         fullDesc: "Desktop-Software in Java zur Visualisierung von 3D-Geometrien im stereolithografischen STL-Format mit Rotation, Zoom und Schnittmodellierung.",
         highlights: [
@@ -658,12 +904,25 @@
     let currentFilter = 'all';
     let searchQuery = '';
     let currentTheme = localStorage.getItem('theme') || 'dark';
+    let currentModalRepo = null;
+
+    // Tactile Vibration Helper for mobile & tablets
+    function triggerHaptic(duration = 10) {
+      if (window.navigator && window.navigator.vibrate) {
+        try {
+          window.navigator.vibrate(duration);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
 
     function initTheme() {
       applyTheme(currentTheme);
     }
 
     function toggleTheme() {
+      triggerHaptic(12);
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', currentTheme);
       applyTheme(currentTheme);
@@ -674,21 +933,24 @@
       const themeIcon = document.getElementById('themeIcon');
       const themeText = document.getElementById('themeText');
       const toggleBtn = document.getElementById('themeToggleBtn');
+      const themeColorMeta = document.getElementById('themeColorMeta');
 
       if (theme === 'dark') {
         body.classList.remove('light');
         body.classList.add('dark');
         document.documentElement.classList.add('dark');
         themeIcon.innerText = '🌙';
-        themeText.innerText = 'Dark Mode';
-        toggleBtn.className = "inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 text-white";
+        themeText.innerText = 'Dark';
+        toggleBtn.className = "touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-white";
+        if (themeColorMeta) themeColorMeta.setAttribute('content', '#120E1C');
       } else {
         body.classList.remove('dark');
         body.classList.add('light');
         document.documentElement.classList.remove('dark');
         themeIcon.innerText = '☀️';
-        themeText.innerText = 'Light Mode';
-        toggleBtn.className = "inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 text-xs sm:text-sm font-bold shadow-md transition-all duration-300 text-slate-800";
+        themeText.innerText = 'Light';
+        toggleBtn.className = "touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 text-xs sm:text-sm font-bold shadow-md transition-all text-slate-800";
+        if (themeColorMeta) themeColorMeta.setAttribute('content', '#FAF8FC');
       }
       renderRepositories();
     }
@@ -702,7 +964,8 @@
         const matchesCategory = currentFilter === 'all' || repo.category === currentFilter;
         const matchesSearch = repo.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                               repo.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                              repo.language.toLowerCase().includes(searchQuery.toLowerCase());
+                              repo.language.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              repo.tech.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
         return matchesCategory && matchesSearch;
       });
 
@@ -714,31 +977,66 @@
 
       filtered.forEach((repo, index) => {
         const card = document.createElement('div');
-        card.className = 'glass-card rounded-3xl p-6 flex flex-col justify-between cursor-pointer animate-fadeInUp';
-        card.style.animationDelay = `${index * 35}ms`;
-        card.onclick = () => openModal(repo.id);
+        card.className = 'glass-card card-touch rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col justify-between cursor-pointer animate-fadeInUp group relative';
+        card.style.animationDelay = `${Math.min(index * 30, 300)}ms`;
+
+        // Tech preview pills (first 3)
+        const techPreview = repo.tech.slice(0, 3).map(t => 
+          `<span class="text-[10px] sm:text-[11px] px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 opacity-75 font-medium">${t}</span>`
+        ).join('');
 
         card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="card-icon-bg text-3xl p-2.5 rounded-2xl border">${repo.icon}</span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-bold border ${repo.badgeColor}">${repo.language}</span>
+          <div onclick="openModal('${repo.id}')">
+            <!-- Card Header: App Icon & Category Badges -->
+            <div class="flex items-center justify-between mb-3.5">
+              <span class="card-icon-bg text-2xl sm:text-3xl p-2 sm:p-2.5 rounded-2xl border shadow-sm shrink-0">${repo.icon}</span>
+              <div class="flex items-center gap-1.5 flex-wrap justify-end">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${repo.badgeColor}">${repo.language}</span>
+              </div>
             </div>
-            <h3 class="card-title text-lg font-bold mb-2 group-hover:text-pink-500 transition-colors flex items-center gap-2 flex-wrap">
-              ${repo.name}
-              ${repo.liveUrl ? '<span class="text-[10px] bg-teal-500/20 text-teal-500 px-2 py-0.5 rounded-full font-bold border border-teal-500/30">Live App 🚀</span>' : ''}
-              ${repo.category === 'flutter' ? '<span class="text-[10px] bg-emerald-500/20 text-emerald-500 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">Release 📥</span>' : ''}
+
+            <!-- Title & Live Badges -->
+            <h3 class="card-title text-base sm:text-lg font-bold mb-1.5 group-hover:text-pink-500 transition-colors flex items-center gap-1.5 flex-wrap">
+              <span>${repo.name}</span>
+              ${repo.liveUrl ? '<span class="text-[9px] sm:text-[10px] bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded-full font-bold border border-teal-500/30">Live 🚀</span>' : ''}
+              ${repo.category === 'flutter' ? '<span class="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">Release 📥</span>' : ''}
             </h3>
-            <p class="card-desc text-xs sm:text-sm line-clamp-3 leading-relaxed mb-4">
+
+            <!-- Short Description -->
+            <p class="card-desc text-xs sm:text-sm line-clamp-2 leading-relaxed mb-3">
               ${repo.shortDesc}
             </p>
+
+            <!-- Tech Pills Preview -->
+            <div class="flex items-center gap-1.5 flex-wrap mb-3.5">
+              ${techPreview}
+            </div>
           </div>
           
-          <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
-            <span class="text-pink-500 font-bold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-              Details ansehen →
-            </span>
-            <span class="opacity-60 font-medium">GitHub Repo ↗</span>
+          <!-- Bottom Action Row: Direct Tap Actions + Details Button -->
+          <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs gap-2">
+            <button onclick="openModal('${repo.id}')" class="text-pink-500 font-bold inline-flex items-center gap-1 hover:translate-x-0.5 transition-transform py-1">
+              <span>Details</span>
+              <span>→</span>
+            </button>
+
+            <div class="flex items-center gap-1.5">
+              ${repo.liveUrl ? `
+                <a href="${repo.liveUrl}" target="_blank" onclick="event.stopPropagation(); triggerHaptic(8);" class="touch-press inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-500/15 hover:bg-teal-500/25 border border-teal-500/30 text-teal-400 font-bold text-[11px] transition-all" title="WebApp im Browser öffnen">
+                  <span>🌐</span>
+                  <span class="hidden xs:inline">WebApp</span>
+                </a>
+              ` : ''}
+              ${repo.directApkUrl ? `
+                <a href="${repo.directApkUrl}" download onclick="event.stopPropagation(); triggerHaptic(8);" class="touch-press inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 font-bold text-[11px] transition-all" title="APK Installationsdatei herunterladen">
+                  <span>📥</span>
+                  <span class="hidden xs:inline">APK</span>
+                </a>
+              ` : ''}
+              <a href="${repo.githubUrl}" target="_blank" onclick="event.stopPropagation(); triggerHaptic(8);" class="opacity-60 hover:opacity-100 p-1 font-medium transition-opacity" title="Auf GitHub öffnen">
+                ↗
+              </a>
+            </div>
           </div>
         `;
         grid.appendChild(card);
@@ -746,25 +1044,52 @@
     }
 
     function setFilter(filter) {
+      triggerHaptic(8);
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         if (btn.dataset.filter === filter) {
-          btn.className = "filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-lg shadow-pink-500/25";
+          btn.className = "touch-press filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-md shadow-pink-500/25 whitespace-nowrap";
         } else {
-          btn.className = "filter-btn filter-unselected px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all";
+          btn.className = "touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap";
         }
       });
       renderRepositories();
     }
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
+    function resetFilters() {
+      triggerHaptic(8);
+      currentFilter = 'all';
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      setFilter('all');
+    }
+
+    function clearSearch() {
+      triggerHaptic(6);
+      searchQuery = '';
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      input.focus();
+      renderRepositories();
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+    searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value.trim();
+      if (searchQuery.length > 0) {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
       renderRepositories();
     });
 
-    let currentModalRepo = null;
-
     function openModal(repoId) {
+      triggerHaptic(12);
       const repo = repositories.find(r => r.id === repoId);
       if (!repo) return;
       currentModalRepo = repo;
@@ -780,8 +1105,8 @@
       const hlContainer = document.getElementById('modalHighlights');
       hlContainer.innerHTML = repo.highlights.map(h => `
         <li class="flex items-start gap-2">
-          <span class="text-pink-500 font-bold">✓</span>
-          <span class="opacity-90">${h}</span>
+          <span class="text-pink-500 font-bold shrink-0">✓</span>
+          <span class="opacity-90 leading-snug">${h}</span>
         </li>
       `).join('');
 
@@ -793,7 +1118,7 @@
         </span>
       `).join('');
 
-      // Release & Zip Download
+      // Release & Zip Download Box
       const dlSection = document.getElementById('modalDownloadSection');
       const webBtn = document.getElementById('modalWebBtn');
       const releaseBtn = document.getElementById('modalReleaseBtn');
@@ -801,7 +1126,7 @@
 
       dlSection.classList.remove('hidden');
 
-      // WebApp Button im Release-Kasten
+      // WebApp Button
       if (repo.liveUrl) {
         webBtn.href = repo.liveUrl;
         webBtn.classList.remove('hidden');
@@ -812,7 +1137,7 @@
       // APK Download / Release Button
       if (repo.directApkUrl) {
         releaseBtn.href = repo.directApkUrl;
-        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
+        releaseBtn.className = "touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span>Release (.apk) 📥</span>
@@ -821,7 +1146,7 @@
         releaseBtn.classList.remove('hidden');
       } else if (repo.category === 'flutter' || repo.category === 'mobile') {
         releaseBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/releases`;
-        releaseBtn.className = "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
+        releaseBtn.className = "touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
         releaseBtn.innerHTML = `
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span>Releases (.apk & Assets)</span>
@@ -840,27 +1165,28 @@
         liveBtn.href = repo.liveUrl;
         liveBtn.innerHTML = `
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span>🌐 WebApp öffnen</span>
+          <span>Live Demo öffnen 🚀</span>
         `;
         liveBtn.classList.remove('hidden');
       } else {
         liveBtn.classList.add('hidden');
       }
 
-      // Show Modal
+      // Show Modal with Bottom Sheet animation
       const modal = document.getElementById('detailModal');
       const box = document.getElementById('modalBox');
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      box.classList.remove('scale-95');
-      box.classList.add('scale-100');
+      box.classList.add('sheet-visible');
+      document.body.style.overflow = 'hidden'; // prevent background scrolling on mobile
     }
 
     function closeModal() {
+      triggerHaptic(6);
       const modal = document.getElementById('detailModal');
       const box = document.getElementById('modalBox');
-      box.classList.remove('scale-100');
-      box.classList.add('scale-95');
+      box.classList.remove('sheet-visible');
       modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
     }
 
     // Close on backdrop click
@@ -876,37 +1202,81 @@
       }
     });
 
-    // QR Code Functions
+    // Native Share or QR Modal Handler
+    function handleShareOrQr() {
+      triggerHaptic(10);
+      const shareData = {
+        title: 'Robert Hofer – Portfolio Showcase 🚀🇨🇭',
+        text: 'Entdecke die Flutter-, Web- und Backend-Projekte von Robert Hofer (Zürich)!',
+        url: 'https://roberthoferzuerich-alt.github.io/portfolio/'
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => {
+          if (err.name !== 'AbortError') {
+            openQrModal('portfolio');
+          }
+        });
+      } else {
+        openQrModal('portfolio');
+      }
+    }
+
+    let activeShareUrl = '';
+    let activeShareTitle = '';
+
     function openQrModal(type, customUrl, customTitle, customSub) {
+      triggerHaptic(10);
       const qrModal = document.getElementById('qrModal');
       const qrBox = document.getElementById('qrModalBox');
       const qrImg = document.getElementById('qrCodeImage');
       const qrTitle = document.getElementById('qrModalTitle');
       const qrSub = document.getElementById('qrModalSubtitle');
       const qrInput = document.getElementById('qrUrlInput');
+      const nativeBtn = document.getElementById('nativeShareBtn');
 
       let targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
-      let title = 'Portfolio am Handy öffnen 📲';
-      let subtitle = 'Scanne den Code mit deiner Handykamera:';
+      let title = 'Auf Smartphone aufrufen 📲';
+      let subtitle = 'Scanne den Code mit deiner Smartphone-Kamera:';
 
       if (type === 'portfolio') {
         targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
-        title = 'Portfolio am Handy öffnen 📲';
-        subtitle = 'Scanne den Code für die mobile Ansicht:';
+        title = 'Portfolio am Smartphone 📲';
+        subtitle = 'Scanne den Code für die mobile WebApp-Ansicht:';
       } else if (customUrl) {
         targetUrl = customUrl;
         title = customTitle || 'App aufrufen';
-        subtitle = customSub || 'Scanne den Code für den mobilen Aufruf:';
+        subtitle = customSub || 'Scanne den Code mit deinem Smartphone:';
       }
+
+      activeShareUrl = targetUrl;
+      activeShareTitle = title;
 
       qrTitle.innerText = title;
       qrSub.innerText = subtitle;
       qrInput.value = targetUrl;
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(targetUrl)}`;
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(targetUrl)}`;
+
+      if (navigator.share) {
+        nativeBtn.classList.remove('hidden');
+      } else {
+        nativeBtn.classList.add('hidden');
+      }
 
       qrModal.classList.remove('opacity-0', 'pointer-events-none');
-      qrBox.classList.remove('scale-95');
-      qrBox.classList.add('scale-100');
+      qrBox.classList.add('sheet-visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function triggerNativeShare() {
+      triggerHaptic(8);
+      if (navigator.share) {
+        navigator.share({
+          title: activeShareTitle || 'Robert Hofer Showcase',
+          text: 'Hier ansehen:',
+          url: activeShareUrl
+        }).catch(() => {});
+      }
     }
 
     function openCurrentProjectQr() {
@@ -915,31 +1285,63 @@
       const url = currentModalRepo.directApkUrl || currentModalRepo.liveUrl || `https://github.com/roberthoferzuerich-alt/${currentModalRepo.id}/releases`;
       const title = `${currentModalRepo.name} 📲`;
       const subtitle = isApk 
-        ? 'Scanne diesen Code mit deinem Smartphone für den direkten APK-Download (v1.0.0, 62.8 MB):' 
-        : (currentModalRepo.liveUrl ? 'Scanne den Code, um die Web-App direkt auf dem Handy zu öffnen:' : 'Scanne den Code für die Release-Dateien:');
+        ? 'Scanne diesen Code mit deinem Smartphone für den direkten APK-Download:' 
+        : (currentModalRepo.liveUrl ? 'Scanne den Code, um die Web-App direkt auf dem Smartphone zu öffnen:' : 'Scanne den Code für die Releases:');
+      
       openQrModal('project', url, title, subtitle);
     }
 
     function closeQrModal() {
+      triggerHaptic(6);
       const qrModal = document.getElementById('qrModal');
       const qrBox = document.getElementById('qrModalBox');
-      qrBox.classList.remove('scale-100');
-      qrBox.classList.add('scale-95');
+      qrBox.classList.remove('sheet-visible');
       qrModal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    function showToast(message, icon = '📋') {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').innerText = message;
+      document.getElementById('toastIcon').innerText = icon;
+      toast.classList.remove('opacity-0');
+      triggerHaptic(15);
+      
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+      }, 2500);
     }
 
     function copyQrUrl() {
       const input = document.getElementById('qrUrlInput');
       input.select();
-      navigator.clipboard.writeText(input.value);
-      alert('Link in die Zwischenablage kopiert: ' + input.value);
+      navigator.clipboard.writeText(input.value).then(() => {
+        showToast('Link kopiert!', '✅');
+      }).catch(() => {
+        showToast('Link markiert zum Kopieren', '📋');
+      });
     }
 
     document.getElementById('qrModal').addEventListener('click', (e) => {
       if (e.target.id === 'qrModal') closeQrModal();
     });
 
-    // Init Theme on load
+    // Floating Back-to-Top Button
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 280) {
+        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }
+    }, { passive: true });
+
+    function scrollToTop() {
+      triggerHaptic(10);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Init Theme & Render on load
     initTheme();
   </script>
 </body>
