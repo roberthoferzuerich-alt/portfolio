@@ -2,16 +2,17 @@
 <html lang="de" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="theme-color" content="#120E1C" id="themeColorMeta">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F0B17" id="themeColorMeta">
+  <meta name="color-scheme" content="dark" id="colorSchemeMeta">
+  <meta name="supported-color-schemes" content="dark light">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Robert Hofer Portfolio">
+  <meta name="apple-mobile-web-app-title" content="Robert Hofer">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Robert Hofer – Portfolio & Repositories Showcase: Moderne Flutter Mobile/Web Apps, Laravel Backend & Tools">
-  <title>Robert Hofer – GitHub Repositories Showcase 🚀🇨🇭</title>
-  
-  <!-- Tailwind CSS CDN with dark mode config -->
+  <meta name="description" content="Robert Hofer – Portfolio & Repositories Showcase: Flutter Mobile/Web Apps, Laravel Backend & Tools">
+  <title>Robert Hofer – Portfolio Showcase 🚀🇨🇭</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,631 +20,526 @@
       theme: {
         extend: {
           screens: {
-            'xs': '420px',
+            'xs': '380px'
           }
         }
       }
     };
   </script>
+
   <style>
-    :root {
+    /* Semantic Theme Tokens (WCAG AA/AAA Contrast in Dark & Light Mode) */
+    :root,
+    html.dark {
+      color-scheme: dark;
+      forced-color-adjust: none;
+      --bg: #0F0B17;
+      --surface: #1A1426;
+      --surface-elevated: #231B33;
+      --border: rgba(255, 255, 255, 0.11);
+      --border-strong: rgba(255, 255, 255, 0.2);
+      --text: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --accent: #FF4D79;
+      --accent-hover: #FF3366;
+      --header-bg: rgba(15, 11, 23, 0.88);
+      --pill-bg: rgba(255, 255, 255, 0.08);
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --icon-bg: rgba(255, 255, 255, 0.07);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.35);
       --sat: env(safe-area-inset-top, 0px);
       --sab: env(safe-area-inset-bottom, 0px);
       --sal: env(safe-area-inset-left, 0px);
       --sar: env(safe-area-inset-right, 0px);
     }
 
-    * {
-      -webkit-tap-highlight-color: transparent;
+    html.light {
+      color-scheme: only light;
+      forced-color-adjust: none;
+      --bg: #F8F7FA;
+      --surface: #FFFFFF;
+      --surface-elevated: #F1EFF6;
+      --border: rgba(15, 23, 42, 0.10);
+      --border-strong: rgba(15, 23, 42, 0.18);
+      --text: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #475569;
+      --accent: #DB2777;
+      --accent-hover: #BE185D;
+      --header-bg: rgba(248, 247, 250, 0.90);
+      --pill-bg: #FFFFFF;
+      --input-bg: #FFFFFF;
+      --icon-bg: #F4EFF8;
+      --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    *, *::before, *::after {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      background-color: var(--bg);
     }
 
     body {
-      padding-top: max(0.75rem, var(--sat));
-      padding-bottom: max(2.5rem, calc(var(--sab) + 2rem));
+      margin: 0;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      padding-bottom: max(5rem, calc(var(--sab) + 4rem));
+      touch-action: manipulation;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fluid Typography via clamp() — Optimized for 320px to Desktop */
+    .fluid-h1 {
+      font-size: clamp(1.35rem, 5.2vw, 2.65rem);
+      line-height: 1.15;
+    }
+    .fluid-subtitle {
+      font-size: clamp(0.875rem, 2.6vw, 1rem);
+      line-height: 1.45;
+    }
+    .fluid-card-title {
+      font-size: clamp(1rem, 3.4vw, 1.125rem);
+      line-height: 1.3;
+    }
+    .fluid-body {
+      font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+      line-height: 1.5;
+    }
+
+    /* Theme Surfaces */
+    .app-topbar {
+      background-color: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding-top: max(0.5rem, var(--sat));
       padding-left: max(0.75rem, var(--sal));
       padding-right: max(0.75rem, var(--sar));
-      touch-action: manipulation;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.04); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes toastFade {
-      0% { opacity: 0; transform: translate(-50%, 20px) scale(0.92); }
-      15% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-      85% { opacity: 1; transform: translate(-50%, 0) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -10px) scale(0.96); }
+    .safe-x {
+      padding-left: max(0.75rem, var(--sal));
+      padding-right: max(0.75rem, var(--sar));
     }
 
-    .animate-fadeInUp {
-      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .surface-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease;
     }
-    
-    /* Dark Theme Styles (Default) */
-    body.dark {
-      background-color: #120E1C !important;
-      color: #f1f5f9 !important;
+    @media (hover: hover) {
+      .surface-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
     }
-    body.dark .ambient-glow {
-      background: radial-gradient(circle at 50% 20%, rgba(255, 82, 119, 0.22) 0%, rgba(156, 39, 176, 0.18) 45%, rgba(0, 196, 180, 0.12) 75%, transparent 100%);
-    }
-    body.dark .glass-card {
-      background: rgba(255, 255, 255, 0.045) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-    }
-    body.dark .glass-card:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(255, 82, 119, 0.4) !important;
-      box-shadow: 0 16px 36px -8px rgba(255, 82, 119, 0.22);
-    }
-    body.dark .modal-inner {
-      background-color: #191426 !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
-      color: #f1f5f9 !important;
-    }
-    body.dark .search-box {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
-      color: #f1f5f9 !important;
-    }
-    body.dark .search-box:focus {
-      background: rgba(255, 255, 255, 0.09) !important;
-      border-color: #FF5277 !important;
-    }
-    body.dark .filter-unselected {
-      background: rgba(255, 255, 255, 0.05) !important;
-      color: #94a3b8 !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    }
-    body.dark .filter-unselected:hover,
-    body.dark .filter-unselected:active {
-      background: rgba(255, 255, 255, 0.1) !important;
-      color: #f1f5f9 !important;
-    }
-    body.dark .modal-desc {
-      color: #cbd5e1 !important;
-    }
-    body.dark .modal-badge {
-      background: rgba(255, 255, 255, 0.06) !important;
-      color: #e2e8f0 !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-    }
-    body.dark .modal-close {
-      background: rgba(255, 255, 255, 0.08) !important;
-      color: #cbd5e1 !important;
-    }
-    body.dark .modal-close:hover,
-    body.dark .modal-close:active {
-      background: rgba(255, 255, 255, 0.16) !important;
-      color: #ffffff !important;
-    }
-    body.dark .card-title {
-      color: #f8fafc !important;
-    }
-    body.dark .card-desc {
-      color: #94a3b8 !important;
-    }
-    body.dark .header-subtitle {
-      color: #94a3b8 !important;
-    }
-    body.dark .card-icon-bg {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-    }
-    body.dark .text-gradient-header {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #f472b6 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-
-    /* Light Theme Styles */
-    body.light {
-      background-color: #FAF8FC !important;
-      color: #1e293b !important;
-    }
-    body.light .ambient-glow {
-      background: radial-gradient(circle at 50% 20%, rgba(255, 82, 119, 0.14) 0%, rgba(156, 39, 176, 0.09) 45%, rgba(0, 196, 180, 0.12) 75%, transparent 100%);
-    }
-    body.light .glass-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-    }
-    body.light .glass-card:hover {
-      background: #FFFFFF !important;
-      border-color: rgba(255, 82, 119, 0.45) !important;
-      box-shadow: 0 16px 32px -6px rgba(255, 82, 119, 0.18);
-    }
-    body.light .text-gradient-header {
-      background: linear-gradient(135deg, #0f172a 0%, #334155 40%, #be185d 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-    body.light .header-subtitle {
-      color: #64748b !important;
-    }
-    body.light .card-title {
-      color: #0f172a !important;
-    }
-    body.light .card-desc {
-      color: #64748b !important;
-    }
-    body.light .card-icon-bg {
-      background: #F4EFF8 !important;
-      border-color: #E6DEF0 !important;
-    }
-    body.light .search-box {
-      background: #FFFFFF !important;
-      border-color: #E2E8F0 !important;
-      color: #0f172a !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    body.light .search-box:focus {
-      background: #FFFFFF !important;
-      border-color: #FF5277 !important;
-    }
-    body.light .search-box::placeholder {
-      color: #94a3b8 !important;
-    }
-    body.light .filter-unselected {
-      background: #FFFFFF !important;
-      color: #475569 !important;
-      border: 1px solid #E2E8F0 !important;
-    }
-    body.light .filter-unselected:hover,
-    body.light .filter-unselected:active {
-      background: #F1F5F9 !important;
-      color: #0f172a !important;
-    }
-    body.light .modal-inner {
-      background-color: #FFFFFF !important;
-      border-color: #E2E8F0 !important;
-      color: #0f172a !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22);
-    }
-    body.light .modal-desc {
-      color: #475569 !important;
-    }
-    body.light .modal-badge {
-      background: #F1F5F9 !important;
-      color: #334155 !important;
-      border-color: #E2E8F0 !important;
-    }
-    body.light .modal-close {
-      background: #F1F5F9 !important;
-      color: #64748b !important;
-    }
-    body.light .modal-close:hover,
-    body.light .modal-close:active {
-      background: #E2E8F0 !important;
-      color: #0f172a !important;
-    }
-
-    .glass-card {
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-    }
-
-    /* Active touch feedback for mobile & tablet */
-    .touch-press {
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .touch-press:active {
-      transform: scale(0.965);
-    }
-    .card-touch:active {
+    .surface-card:active {
       transform: scale(0.985);
     }
 
-    .modal-backdrop {
-      background: rgba(10, 8, 18, 0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    .surface-input {
+      background-color: var(--input-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .surface-input::placeholder {
+      color: var(--text-muted);
+    }
+    .surface-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 77, 121, 0.2);
     }
 
-    /* Scrollbar styling */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    .surface-pill {
+      background-color: var(--pill-bg);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
     }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 82, 119, 0.35);
-      border-radius: 9999px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
+    .surface-pill-active {
+      background-color: var(--accent);
+      border: 1px solid transparent;
+      color: #FFFFFF;
     }
 
-    /* Responsive Sheet / Modal Behavior */
-    @media (max-width: 639px) {
-      .modal-wrapper {
-        align-items: flex-end !important;
-        justify-content: flex-end !important;
-        padding: 0 !important;
-      }
-      .modal-box-responsive {
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
-        border-top-left-radius: 1.75rem !important;
-        border-top-right-radius: 1.75rem !important;
-        width: 100% !important;
-        height: 85vh !important;
-        height: 85dvh !important;
-        max-height: 85vh !important;
-        max-height: 85dvh !important;
-        padding: 1rem 1rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem)) 1rem !important;
-        display: flex !important;
-        flex-direction: column !important;
-        transform: translateY(100%);
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .modal-box-responsive.sheet-visible {
-        transform: translateY(0) !important;
-      }
-      .qr-box-responsive {
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
-        border-top-left-radius: 1.75rem !important;
-        border-top-right-radius: 1.75rem !important;
-        width: 100% !important;
-        padding: 1.25rem 1.25rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem)) 1.25rem !important;
-        transform: translateY(100%);
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .qr-box-responsive.sheet-visible {
-        transform: translateY(0) !important;
-      }
+    .surface-icon {
+      background-color: var(--icon-bg);
+      border: 1px solid var(--border);
+    }
+
+    .surface-sheet {
+      background-color: var(--surface);
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+
+    .text-secondary { color: var(--text-secondary); }
+    .text-muted { color: var(--text-muted); }
+    .border-subtle { border-color: var(--border); }
+
+    /* 60 FPS GPU-Accelerated Interactions & Animations */
+    .touch-target {
+      min-width: 44px;
+      min-height: 44px;
+      transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.14s ease;
+    }
+    .touch-target:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translate3d(0, 12px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .animate-card {
+      animation: fadeInUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    /* Native Bottom Sheet (Mobile) & Centered Dialog (Tablet/Desktop) */
+    .sheet-backdrop {
+      background-color: rgba(8, 6, 14, 0.72);
+      transition: opacity 0.24s ease;
+      will-change: opacity;
+    }
+
+    .sheet-panel {
+      will-change: transform;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translate3d(0, 100%, 0);
+      max-height: 88vh;
+      max-height: 88dvh;
+    }
+    .sheet-panel.is-open {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .sheet-footer {
+      padding-bottom: max(1rem, calc(var(--sab) + 0.75rem));
     }
 
     @media (min-width: 640px) {
-      .modal-box-responsive {
-        transform: scale(0.95);
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        max-height: 90vh;
+      .sheet-panel {
+        transform: scale3d(0.95, 0.95, 1);
+        opacity: 0;
+        transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+        max-height: 88dvh;
       }
-      .modal-box-responsive.sheet-visible {
-        transform: scale(1) !important;
+      .sheet-panel.is-open {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
       }
-      .qr-box-responsive {
-        transform: scale(0.95);
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      .sheet-footer {
+        padding-bottom: 1.25rem;
       }
-      .qr-box-responsive.sheet-visible {
-        transform: scale(1) !important;
+    }
+
+    /* Landscape Smartphone Optimization */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .hero-section {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+      .repo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      .sheet-panel {
+        max-height: 94dvh !important;
+      }
+    }
+
+    /* Floating Action Button Positioning (Above Safe Area) */
+    .fab-btn {
+      bottom: max(1.25rem, calc(var(--sab) + 0.75rem));
+      right: max(1rem, calc(var(--sar) + 0.75rem));
+      will-change: transform, opacity;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+    }
+
+    /* Scrollbar Utilities */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .sheet-scroll {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
-<body id="appBody" class="dark min-h-screen font-sans selection:bg-[#FF5277] selection:text-white transition-colors duration-300 relative">
+<body>
 
-  <!-- Top Ambient Glow -->
-  <div class="ambient-glow fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[340px] blur-[100px] pointer-events-none -z-10 transition-all duration-500"></div>
-
-  <!-- Header Section -->
-  <header class="max-w-6xl mx-auto pt-2 sm:pt-6 pb-4 sm:pb-6 px-3 sm:px-6">
-    
-    <!-- Top Bar with Profile Badge & Quick Action Buttons -->
-    <div class="flex items-center justify-between gap-2 mb-4 sm:mb-6">
-      
-      <!-- Developer Status Pill -->
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-pink-500 animate-fadeInUp shadow-sm max-w-[210px] sm:max-w-none truncate">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
-        <span class="truncate">Robert Hofer • Zürich 🇨🇭</span>
-        <span class="hidden sm:inline opacity-40">•</span>
-        <span class="hidden sm:inline opacity-90">Open Source Showcase</span>
+  <!-- Sticky Mobile-First App Bar -->
+  <nav class="app-topbar sticky top-0 z-30 pb-2">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
+      <!-- Brand / Status -->
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" aria-hidden="true"></span>
+        <div class="min-w-0 leading-tight">
+          <div class="font-bold text-sm truncate">Robert Hofer</div>
+          <div class="text-[11px] text-muted truncate">Zürich 🇨🇭 • Open Source</div>
+        </div>
       </div>
 
-      <!-- Action Buttons: Share & Dark Mode Toggle -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <!-- Share / QR Button -->
-        <button 
-          id="shareBtn"
-          onclick="handleShareOrQr()" 
-          class="touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-inherit"
-          title="Portfolio teilen oder QR-Code scannen"
+      <!-- 44x44px Thumb-Friendly Top Actions -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button
+          type="button"
+          onclick="handleShareOrQr()"
+          class="touch-target surface-pill inline-flex items-center justify-center gap-1.5 px-3 rounded-xl text-xs font-bold"
+          aria-label="Portfolio teilen oder QR-Code öffnen"
         >
-          <span class="text-sm sm:text-base">📲</span>
-          <span class="hidden xs:inline sm:inline">Teilen</span>
+          <span aria-hidden="true" class="text-base">📲</span>
+          <span class="hidden xs:inline">Teilen</span>
         </button>
 
-        <!-- Dark Mode / Light Mode Switch Button -->
-        <button 
-          id="themeToggleBtn" 
-          onclick="toggleTheme()" 
-          class="touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-inherit"
-          title="Zwischen Dark Mode und Light Mode wechseln"
+        <button
+          type="button"
+          id="themeToggleBtn"
+          onclick="toggleTheme()"
+          class="touch-target surface-pill inline-flex items-center justify-center gap-1.5 px-3 rounded-xl text-xs font-bold"
+          aria-label="Darstellungsmodus wechseln"
         >
-          <span id="themeIcon" class="text-sm sm:text-base">🌙</span>
-          <span id="themeText" class="text-xs sm:text-sm font-bold">Dunkel</span>
+          <span id="themeIcon" aria-hidden="true" class="text-base">🌙</span>
+          <span id="themeText">Dunkel</span>
         </button>
       </div>
     </div>
+  </nav>
 
-    <!-- Main Hero Headline -->
-    <div class="text-center">
-      <div class="inline-block mb-2">
-        <span class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-teal-500/20 border border-pink-500/30 text-pink-400">
-          Mobile • Web • Backend • Tools
-        </span>
-      </div>
-      <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-gradient-header bg-gradient-to-r from-white via-slate-100 to-pink-300 bg-clip-text text-transparent mb-2.5 animate-fadeInUp leading-tight">
-        Robert Hofer – Portfolio Showcase 🚀
+  <!-- Compact Hero & Sticky-Ready Controls -->
+  <header class="hero-section safe-x max-w-6xl mx-auto pt-4 pb-3 sm:pt-7 sm:pb-6">
+    <div class="max-w-2xl sm:mx-auto sm:text-center mb-4">
+      <h1 class="fluid-h1 font-black tracking-tight mb-1.5">
+        Portfolio Showcase 🚀
       </h1>
-      <p class="header-subtitle text-xs sm:text-sm md:text-base text-slate-400 max-w-2xl mx-auto mb-5 sm:mb-6 animate-fadeInUp leading-relaxed px-2">
-        17 kuratierte Projekte: Moderne Schweizer Radio- & Foto-Apps in Flutter, reaktive Mobile Chat-Lösungen, sichere Laravel-APIs und smarte Developer-Tools.
+      <p class="fluid-subtitle text-secondary">
+        17 Projekte aus Flutter, Laravel &amp; Developer-Tools – direkt testen oder herunterladen.
       </p>
+    </div>
 
-      <!-- Quick Interactive Stats Bar (Mobile & Tablet Friendly) -->
-      <div class="flex items-center justify-center gap-1.5 sm:gap-2.5 mb-5 overflow-x-auto no-scrollbar py-1 px-1 text-xs">
-        <button onclick="setFilter('all')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-pink-500"></span>
-          <span>17 Projekte</span>
-        </button>
-        <button onclick="setFilter('flutter')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-          <span>8 Flutter Apps</span>
-        </button>
-        <button onclick="setFilter('php')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-          <span>6 Backend</span>
-        </button>
-        <button onclick="setFilter('other')" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 font-medium whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-          <span>3 Tools</span>
+    <!-- Search & Filter Bar -->
+    <div class="max-w-3xl mx-auto flex flex-col gap-2.5 sm:flex-row sm:items-center">
+      <!-- Search Input (16px on mobile prevents iOS Safari auto-zoom) -->
+      <div class="relative flex-1 min-w-0">
+        <svg class="w-5 h-5 text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Projekt oder Tech suchen..."
+          aria-label="Projekte durchsuchen"
+          class="surface-input w-full min-h-[48px] pl-11 pr-12 rounded-2xl text-base sm:text-sm"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button
+          type="button"
+          id="clearSearchBtn"
+          onclick="clearSearch()"
+          class="hidden touch-target absolute right-1 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-xl text-muted"
+          aria-label="Suche leeren"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <!-- Search & Filter Controls -->
-      <div class="max-w-3xl mx-auto flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-4 sm:mb-8">
-        
-        <!-- Live Search Bar -->
-        <div class="relative flex-1">
-          <input 
-            type="search" 
-            id="searchInput" 
-            placeholder="Projekt suchen (z.B. Suisse Radio, PhotoKids)..."
-            class="search-box w-full pl-10 pr-9 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm text-inherit placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500/30 transition-all border"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3 sm:top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <button 
-            id="clearSearchBtn" 
-            onclick="clearSearch()" 
-            class="hidden absolute right-3 top-2.5 sm:top-3 p-1 rounded-full text-slate-400 hover:text-white transition-colors"
-            title="Suche zurücksetzen"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
-        </div>
-
-        <!-- Filter Pills with Native-Style Horizontal Scrolling -->
-        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0" id="filterContainer">
-          <button onclick="setFilter('all')" class="touch-press filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-md shadow-pink-500/25 whitespace-nowrap" data-filter="all">Alle (17)</button>
-          <button onclick="setFilter('flutter')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="flutter">Flutter 💙 (8)</button>
-          <button onclick="setFilter('php')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="php">PHP/Laravel 🐘 (6)</button>
-          <button onclick="setFilter('other')" class="touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap" data-filter="other">Java & Tools ⚙️ (3)</button>
-        </div>
+      <!-- Horizontal Swipeable 44px Filter Pills -->
+      <div id="filterContainer" role="tablist" aria-label="Projektkategorien" class="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-3 px-3 sm:mx-0 sm:px-0 py-0.5 shrink-0">
+        <button type="button" role="tab" aria-selected="true" onclick="setFilter('all')" data-filter="all" class="filter-btn touch-target surface-pill-active px-3.5 rounded-xl text-xs font-bold whitespace-nowrap">Alle (17)</button>
+        <button type="button" role="tab" aria-selected="false" onclick="setFilter('flutter')" data-filter="flutter" class="filter-btn touch-target surface-pill px-3.5 rounded-xl text-xs font-bold whitespace-nowrap">Flutter 💙 (8)</button>
+        <button type="button" role="tab" aria-selected="false" onclick="setFilter('php')" data-filter="php" class="filter-btn touch-target surface-pill px-3.5 rounded-xl text-xs font-bold whitespace-nowrap">PHP/Laravel 🐘 (6)</button>
+        <button type="button" role="tab" aria-selected="false" onclick="setFilter('other')" data-filter="other" class="filter-btn touch-target surface-pill px-3.5 rounded-xl text-xs font-bold whitespace-nowrap">Tools ⚙️ (3)</button>
       </div>
     </div>
   </header>
 
-  <!-- Repository Grid: 1 col on mobile, 2 cols on tablet, 3 cols on desktop -->
-  <main class="max-w-6xl mx-auto px-3 sm:px-6">
-    <div id="repoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
-      <!-- Injected via JavaScript -->
+  <!-- Full-Width Mobile Card Grid -->
+  <main class="safe-x max-w-6xl mx-auto">
+    <div id="repoGrid" class="repo-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
+      <!-- Rendered via JS -->
     </div>
 
     <!-- Empty State -->
-    <div id="emptyState" class="hidden text-center py-16 px-4">
-      <div class="w-16 h-16 mx-auto mb-4 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl">🔍</div>
-      <h3 class="text-base sm:text-lg font-bold text-slate-300 mb-1">Kein Repository gefunden</h3>
-      <p class="text-xs sm:text-sm text-slate-500 mb-4">Versuche einen anderen Suchbegriff oder wechsle den Filter.</p>
-      <button onclick="resetFilters()" class="touch-press px-4 py-2 rounded-xl bg-pink-500 text-white text-xs font-bold shadow-md">Filter zurücksetzen</button>
+    <div id="emptyState" class="hidden text-center py-12 px-4">
+      <div class="w-14 h-14 mx-auto mb-3 rounded-2xl surface-icon flex items-center justify-center text-2xl" aria-hidden="true">🔍</div>
+      <h2 class="text-base font-bold mb-1">Keine Projekte gefunden</h2>
+      <p class="text-sm text-muted mb-4">Versuche einen anderen Suchbegriff oder Filter.</p>
+      <button type="button" onclick="resetFilters()" class="touch-target surface-pill-active px-5 rounded-xl text-sm font-bold">
+        Filter zurücksetzen
+      </button>
     </div>
   </main>
 
-  <!-- Detail Modal / Bottom Sheet (Sliding Sheet on Phones, Centered Dialog on Tablets & Desktop) -->
-  <div id="detailModal" class="modal-wrapper fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="modalBox" class="modal-box-responsive modal-inner border w-full max-w-xl rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden relative flex flex-col">
-      
-      <!-- Drag handle indicator for mobile phones -->
-      <div class="w-12 h-1.5 rounded-full bg-slate-400/40 mx-auto mb-2.5 sm:hidden cursor-pointer shrink-0" onclick="closeModal()"></div>
+  <!-- Native Detail Bottom Sheet (Mobile) / Modal (Tablet & Desktop) -->
+  <div id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="sheet-backdrop fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 opacity-0 pointer-events-none">
+    <div id="modalBox" class="sheet-panel surface-sheet border-t sm:border w-full sm:max-w-xl rounded-t-[24px] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
 
-      <!-- Top Navigation Bar: Back Button (Zurück) & Close Button (X) -->
-      <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 dark:border-white/10 border-slate-200 shrink-0">
-        <button onclick="closeModal()" class="touch-press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md transition-all shrink-0" aria-label="Zurück zur Übersicht" title="Zurück zur Übersicht">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          <span>← Zurück</span>
+      <!-- Swipe-Down Drag Handle (Mobile) -->
+      <div id="detailDragHandle" class="pt-2.5 pb-1 flex justify-center sm:hidden shrink-0 cursor-grab active:cursor-grabbing" aria-hidden="true">
+        <div class="w-10 h-1.5 rounded-full bg-slate-400/40"></div>
+      </div>
+
+      <!-- Sticky Sheet Header -->
+      <div class="flex items-center justify-between gap-2 px-4 py-2 border-b border-subtle shrink-0">
+        <button type="button" onclick="closeModal()" class="touch-target inline-flex items-center gap-1.5 px-3 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold shrink-0" aria-label="Zurück zur Übersicht">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          <span>Zurück</span>
         </button>
 
-        <span class="text-xs font-bold opacity-75">Projektdetails</span>
+        <span class="text-xs font-bold text-muted truncate">Projektdetails</span>
 
-        <button onclick="closeModal()" class="modal-close p-2 rounded-full transition-colors flex items-center justify-center shrink-0" aria-label="Schließen" title="Schließen">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+        <button type="button" onclick="closeModal()" class="touch-target surface-pill inline-flex items-center justify-center rounded-xl shrink-0" aria-label="Schließen">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <!-- Scrollable Modal Content Container -->
-      <div class="overflow-y-auto overscroll-contain pr-1 custom-scrollbar flex-1 pb-2">
-        <!-- Modal Content Header -->
-        <div class="flex items-start gap-3.5 mb-4 pr-8">
-          <div id="modalIcon" class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shrink-0 bg-pink-500/20 text-pink-400 border border-pink-500/30">
-            📁
-          </div>
-          <div>
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span id="modalLanguage" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Dart</span>
-              <span id="modalCategory" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/5 text-slate-400 border border-white/10">Mobile & Web</span>
+      <!-- Scrollable Sheet Content -->
+      <div id="modalScrollArea" class="sheet-scroll flex-1 overflow-y-auto px-4 py-4 sm:px-6 space-y-5">
+        <!-- Project Title Row -->
+        <div class="flex items-center gap-3">
+          <div id="modalIcon" class="w-12 h-12 rounded-2xl surface-icon flex items-center justify-center text-2xl shrink-0" aria-hidden="true">📁</div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5 flex-wrap mb-1">
+              <span id="modalLanguage" class="px-2 py-0.5 rounded-md text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">Dart</span>
+              <span id="modalCategory" class="px-2 py-0.5 rounded-md text-xs font-semibold surface-pill">FLUTTER</span>
             </div>
-            <h2 id="modalTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">Repository Name</h2>
+            <h2 id="modalTitle" class="text-lg sm:text-xl font-extrabold tracking-tight truncate">Repository Name</h2>
           </div>
         </div>
 
         <!-- Description -->
-        <p id="modalDescription" class="modal-desc text-xs sm:text-sm leading-relaxed mb-5">
-          Beschreibung des Repositories...
-        </p>
+        <p id="modalDescription" class="fluid-body text-secondary"></p>
 
-        <!-- Features / Highlights -->
-        <div class="mb-5">
-          <h4 class="text-xs uppercase tracking-wider text-pink-500 font-bold mb-2.5 flex items-center gap-1.5">
-            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            Highlights & Architektur
-          </h4>
-          <ul id="modalHighlights" class="space-y-2 text-xs sm:text-sm">
-            <!-- Injected via JS -->
-          </ul>
+        <!-- Highlights -->
+        <div>
+          <h3 class="text-xs uppercase tracking-wider font-bold text-pink-600 dark:text-pink-400 mb-2.5">Highlights &amp; Architektur</h3>
+          <ul id="modalHighlights" class="space-y-2 fluid-body text-secondary"></ul>
         </div>
 
-        <!-- Tech Stack Badges -->
-        <div class="mb-5">
-          <h4 class="text-xs uppercase tracking-wider opacity-60 font-bold mb-2">Technologie-Stack</h4>
-          <div id="modalTech" class="flex flex-wrap gap-1.5">
-            <!-- Injected via JS -->
-          </div>
+        <!-- Tech Stack -->
+        <div>
+          <h3 class="text-xs uppercase tracking-wider font-bold text-muted mb-2">Technologie-Stack</h3>
+          <div id="modalTech" class="flex flex-wrap gap-1.5"></div>
         </div>
 
-        <!-- Release & Download Actions for Flutter & Apps -->
-        <div id="modalDownloadSection" class="mb-4 p-3.5 sm:p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col gap-3">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0">
-              📦
-            </div>
-            <div>
-              <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">App-Downloads & Releases</h4>
-              <p class="text-[11px] opacity-75">Installations- und Paketdateien für dieses Projekt</p>
+        <!-- Downloads & Quick Actions -->
+        <div id="modalDownloadSection" class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl" aria-hidden="true">📦</span>
+            <div class="min-w-0">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Downloads &amp; Releases</h3>
+              <p class="text-xs text-secondary">App testen, APK installieren oder Code laden</p>
             </div>
           </div>
-          
-          <div class="flex items-center gap-2 w-full flex-wrap pt-1">
-            <a id="modalWebBtn" href="#" target="_blank" class="touch-press hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-extrabold text-xs shadow-md shadow-emerald-500/25 transition-all">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+
+          <div class="grid grid-cols-2 gap-2">
+            <a id="modalWebBtn" href="#" target="_blank" rel="noopener" class="hidden touch-target col-span-2 inline-flex items-center justify-center gap-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs">
               <span>🌐 WebApp öffnen</span>
             </a>
-            <a id="modalReleaseBtn" href="#" target="_blank" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span>Release (.apk)</span>
+            <a id="modalReleaseBtn" href="#" target="_blank" rel="noopener" class="touch-target inline-flex items-center justify-center gap-1.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
+              <span>📥 Release (.apk)</span>
             </a>
-            <a id="modalZipBtn" href="#" target="_blank" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="Quellcode als ZIP herunterladen">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              <span>Code (.zip)</span>
+            <a id="modalZipBtn" href="#" target="_blank" rel="noopener" class="touch-target surface-pill inline-flex items-center justify-center gap-1.5 px-3 rounded-xl font-bold text-xs">
+              <span>📦 Code (.zip)</span>
             </a>
-            <button id="modalQrBtn" onclick="openCurrentProjectQr()" class="touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold transition-all text-inherit" title="QR-Code zum Scannen oder Teilen">
-              <span class="text-xs">📲</span>
-              <span>Teilen</span>
+            <button type="button" id="modalQrBtn" onclick="openCurrentProjectQr()" class="touch-target surface-pill col-span-2 inline-flex items-center justify-center gap-1.5 px-3 rounded-xl font-bold text-xs">
+              <span>📲 Teilen / QR-Code</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Action Buttons Footer with Safe Area Margin -->
-      <div class="flex items-center gap-2 pt-2.5 border-t border-white/10 dark:border-white/10 border-slate-200 shrink-0">
-        <button onclick="closeModal()" class="touch-press inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 text-pink-400 font-bold text-xs transition-all shrink-0" title="Zurück">
-          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          <span class="hidden xs:inline">Zurück</span>
-        </button>
-        <a id="modalBrowserLink" href="#" target="_blank" class="touch-press flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5277] to-[#FF7597] text-white font-bold text-xs shadow-md shadow-pink-500/25 hover:opacity-95 transition-all truncate">
-          <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span class="truncate">Auf GitHub ansehen</span>
+      <!-- Sticky Thumb-Zone Footer (Always Above Safe Area / System Nav) -->
+      <div class="sheet-footer px-4 pt-3 sm:px-6 border-t border-subtle flex items-center gap-2 shrink-0">
+        <a id="modalBrowserLink" href="#" target="_blank" rel="noopener" class="touch-target flex-1 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-sm truncate">
+          <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="truncate">GitHub</span>
         </a>
-        <a id="modalLiveDemo" href="#" target="_blank" class="touch-press hidden flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#00C4B4] to-[#26E5D4] text-slate-900 font-bold text-xs sm:text-sm shadow-md shadow-teal-500/25 hover:opacity-95 transition-all truncate">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span class="truncate">Live Demo</span>
+        <a id="modalLiveDemo" href="#" target="_blank" rel="noopener" class="hidden touch-target flex-1 inline-flex items-center justify-center gap-1.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm truncate">
+          <span class="truncate">🚀 Live Demo</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- QR Code & Share Modal -->
-  <div id="qrModal" class="modal-wrapper fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 modal-backdrop opacity-0 pointer-events-none transition-all duration-300">
-    <div id="qrModalBox" class="qr-box-responsive modal-inner border w-full max-w-sm rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl text-center relative">
-      
-      <!-- Drag handle indicator for mobile phones -->
-      <div class="w-12 h-1.5 rounded-full bg-slate-400/30 mx-auto mb-3 sm:hidden cursor-pointer" onclick="closeQrModal()"></div>
-
-      <button onclick="closeQrModal()" class="modal-close absolute top-4 right-4 p-2 rounded-full transition-colors" aria-label="Schließen">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-pink-500/20 text-pink-500 flex items-center justify-center text-2xl border border-pink-500/30">
-        📱
+  <!-- Native Share & QR Bottom Sheet -->
+  <div id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle" class="sheet-backdrop fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 opacity-0 pointer-events-none">
+    <div id="qrModalBox" class="sheet-panel surface-sheet border-t sm:border w-full sm:max-w-sm rounded-t-[24px] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="pt-2.5 pb-1 flex justify-center sm:hidden shrink-0" onclick="closeQrModal()" aria-hidden="true">
+        <div class="w-10 h-1.5 rounded-full bg-slate-400/40"></div>
       </div>
 
-      <h3 id="qrModalTitle" class="text-lg font-extrabold mb-1">Auf Smartphone aufrufen</h3>
-      <p id="qrModalSubtitle" class="text-xs opacity-75 mb-3.5">Scanne den QR-Code oder teile den Direktlink:</p>
-
-      <!-- QR Image Container -->
-      <div class="bg-white p-3 rounded-2xl inline-block shadow-md border border-slate-200 mb-3.5">
-        <img id="qrCodeImage" src="" alt="QR Code" class="w-48 h-48 block mx-auto object-contain" />
-      </div>
-
-      <div class="flex items-center gap-2 mb-2">
-        <input id="qrUrlInput" type="text" readonly class="search-box w-full px-3 py-2 rounded-xl text-xs font-mono border text-center opacity-90 select-all" />
-        <button onclick="copyQrUrl()" class="touch-press px-3.5 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-md shadow-pink-500/20 transition-all shrink-0">
-          Kopieren
+      <div class="flex items-center justify-between px-4 py-2 border-b border-subtle">
+        <span class="text-xs font-bold text-muted">Teilen &amp; QR-Code</span>
+        <button type="button" onclick="closeQrModal()" class="touch-target surface-pill inline-flex items-center justify-center rounded-xl" aria-label="Schließen">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
-      <!-- Native Share Button if supported -->
-      <button id="nativeShareBtn" onclick="triggerNativeShare()" class="touch-press hidden w-full py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-xs font-bold shadow-md transition-all">
-        📤 Über Smartphone teilen (WhatsApp, AirDrop, etc.)
-      </button>
+      <div class="sheet-footer px-5 pt-4 text-center space-y-3.5">
+        <div>
+          <h3 id="qrModalTitle" class="text-base font-extrabold">Auf Smartphone öffnen</h3>
+          <p id="qrModalSubtitle" class="text-xs text-secondary mt-0.5">Code scannen oder Direktlink kopieren:</p>
+        </div>
+
+        <div class="bg-white p-3 rounded-2xl inline-block border border-slate-200">
+          <img id="qrCodeImage" src="" alt="QR-Code" width="184" height="184" class="w-44 h-44 block mx-auto object-contain" loading="lazy" />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input id="qrUrlInput" type="text" readonly aria-label="Link zum Kopieren" class="surface-input flex-1 min-w-0 min-h-[44px] px-3 rounded-xl text-xs font-mono text-center select-all" />
+          <button type="button" onclick="copyQrUrl()" class="touch-target px-4 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shrink-0">
+            Kopieren
+          </button>
+        </div>
+
+        <button type="button" id="nativeShareBtn" onclick="triggerNativeShare()" class="hidden touch-target w-full rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold">
+          📤 Direkt über Smartphone teilen
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
-  <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="px-4 py-2.5 rounded-2xl bg-slate-900/90 text-white text-xs sm:text-sm font-semibold border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2">
-      <span id="toastIcon">📋</span>
-      <span id="toastMessage">In die Zwischenablage kopiert!</span>
+  <!-- Toast Notification -->
+  <div id="toastNotification" role="status" aria-live="polite" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-[60] pointer-events-none opacity-0 transition-opacity duration-200">
+    <div class="px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-bold border border-white/15 shadow-xl flex items-center gap-2 whitespace-nowrap">
+      <span id="toastIcon" aria-hidden="true">✅</span>
+      <span id="toastMessage">Kopiert!</span>
     </div>
   </div>
 
-  <!-- Floating Back-to-Top Button -->
-  <button 
-    id="backToTopBtn" 
-    onclick="scrollToTop()" 
-    class="touch-press fixed bottom-5 right-4 sm:right-6 z-40 p-3 rounded-2xl bg-pink-500 text-white shadow-xl shadow-pink-500/30 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4"
+  <!-- Floating Back-to-Top Action Button (48x48px, Safe-Area Aware) -->
+  <button
+    type="button"
+    id="backToTopBtn"
+    onclick="scrollToTop()"
+    class="fab-btn fixed z-40 w-12 h-12 rounded-2xl bg-pink-600 hover:bg-pink-700 text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none translate-y-3"
     aria-label="Nach oben scrollen"
-    title="Nach oben scrollen"
   >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
+    </svg>
   </button>
 
   <script>
-    // Repository Data for Robert Hofer (Zürich)
     const repositories = [
       {
         id: "Suisse-Radio",
@@ -651,18 +547,20 @@
         category: "flutter",
         icon: "📻",
         language: "Dart",
-        badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
-        shortDesc: "Moderne Schweizer Radio-Streaming-App mit Playlists, High-End Audio-Export und Equalizer.",
-        fullDesc: "Suisse Radio ist eine elegante Flutter-App zum Empfang und Genuss aller Schweizer Radiosender (SRF 1/2/3, RTS, RSI, Pop, Lokalsender). Sie bietet Live-Streaming mit Hintergrundwiedergabe, interaktive Playlists mit Reordering, ein Hi-Fi Export-Studio für Mitschnitte & Playlists sowie ein modernes Material 3 Interface.",
+        badgeColor: "bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/30",
+        shortDesc: "Schweizer Radio-Streaming-App mit Playlists, High-End Audio-Export und Equalizer.",
+        fullDesc: "Suisse Radio ist eine elegante Flutter-App zum Empfang aller Schweizer Radiosender (SRF 1/2/3, RTS, RSI, Pop, Lokalsender). Sie bietet Live-Streaming mit Hintergrundwiedergabe, interaktive Playlists mit Reordering, ein Hi-Fi Export-Studio sowie ein modernes Material 3 Interface.",
         highlights: [
-          "Live-Streaming aller Schweizer Radiosender mit AudioService-Hintergrundwiedergabe",
-          "Interaktive Playlists mit Drag & Drop Neuanordnung und Senderverwaltung",
-          "Hi-Fi Streaming- & Export-Studio (MP3 320k, FLAC, AAC 256k, WAV, M3U8, PLS)",
-          "Animierte Equalizer-Wellen, Mini-Player & moderne Now-Playing-Bedienung",
-          "Offline-Senderdatenbank mit SQLite-Caching & Material 3 Dark/Light-Design"
+          "Live-Streaming aller Schweizer Radiosender mit Hintergrundwiedergabe",
+          "Automatische Stream-Prüfung & Auto-Recovery bei veralteten URLs",
+          "Interaktive Playlists mit Drag & Drop Neuanordnung",
+          "Hi-Fi Streaming- & Export-Studio (MP3 320k, FLAC, AAC, WAV, M3U8, PLS)",
+          "Animierte Equalizer-Wellen, Mini-Player & Now-Playing-Steuerung",
+          "Offline-Senderdatenbank mit SQLite-Caching & Material 3"
         ],
-        tech: ["Flutter 3", "Dart", "just_audio", "audio_service", "SQLite (sqflite)", "Material 3", "Provider"],
-        githubUrl: "https://github.com/roberthoferzuerich-alt/Suisse-Radio"
+        tech: ["Flutter 3", "Dart", "just_audio", "audio_service", "SQLite", "Material 3", "Provider"],
+        githubUrl: "https://github.com/roberthoferzuerich-alt/Suisse-Radio",
+        directApkUrl: "https://github.com/roberthoferzuerich-alt/Suisse-Radio/releases/download/v1.0.0/app-release.apk"
       },
       {
         id: "PhotoKids-Studio",
@@ -670,17 +568,17 @@
         category: "flutter",
         icon: "📸",
         language: "Dart",
-        badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30",
-        shortDesc: "Moderne, kindgerechte Fotoverwaltungs- und Bildbearbeitungs-App für Android, iOS und Web mit KI-Zauberpinsel.",
-        fullDesc: "PhotoKids Studio ist eine vollwertige, kinderleichte Foto- und Bildbearbeitungs-App mit spielerischem Material Design 3. Sie bietet einen kostenlosen KI-Zauberpinsel für Sprache & Text, ein sicheres Studio zum Malen und Dekorieren sowie das Verwalten von Familienfotos ohne Werbebanner oder Online-Zwang.",
+        badgeColor: "bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/30",
+        shortDesc: "Kindgerechte Foto- und Bildbearbeitungs-App für Android, iOS & Web mit KI-Zauberpinsel.",
+        fullDesc: "PhotoKids Studio ist eine vollwertige, kinderleichte Foto- und Bildbearbeitungs-App mit spielerischem Material Design 3. Sie bietet einen kostenlosen KI-Zauberpinsel für Sprache & Text, ein sicheres Studio zum Malen sowie Familienfoto-Verwaltung ohne Werbung.",
         highlights: [
-          "🪄 Kostenloser KI Zauber-Pinsel: Kinder zaubern eigene Bilder per Text- und Spracheingabe (Pollinations AI)",
-          "Studio-Editor mit Zauberstiften, Vorher/Nachher-Slider, Malbuch-Modus und Fotokarten",
+          "🪄 Kostenloser KI Zauber-Pinsel per Text- und Spracheingabe (Pollinations AI)",
+          "Studio-Editor mit Zauberstiften, Vorher/Nachher-Slider & Malbuch-Modus",
           "Automatisches Album-Management & animierte Vollbild-Diashow",
           "Eltern-Bereich gesichert durch Mathe-Aufgabe & PIN-Code",
-          "Plattformunabhängig: Läuft nativ auf Android, iOS & als WebAssembly im Browser"
+          "Läuft nativ auf Android, iOS & als WebAssembly im Browser"
         ],
-        tech: ["Flutter 3", "Dart", "Riverpod 2", "KI Bildgenerierung (Flux/Turbo)", "SQLite (WASM/FFI)", "CanvasKit", "Clean Architecture"],
+        tech: ["Flutter 3", "Dart", "Riverpod 2", "KI Bildgenerierung", "SQLite", "CanvasKit", "Clean Architecture"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/PhotoKids-Studio",
         liveUrl: "https://roberthoferzuerich-alt.github.io/PhotoKids-Studio/",
         directApkUrl: "https://github.com/roberthoferzuerich-alt/PhotoKids-Studio/releases/download/v1.0.1/app-release.apk"
@@ -691,13 +589,13 @@
         category: "flutter",
         icon: "💬",
         language: "Dart",
-        badgeColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+        badgeColor: "bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30",
         shortDesc: "Moderne Mobile Chat-Applikation für das ChatConnect-Kommunikationsnetzwerk.",
-        fullDesc: "Reaktive Mobile-App für plattformübergreifenden Echtzeitaustausch. Konzipiert für zuverlässige Kommunikation, intuitive Chat-Navigation, Medienversand und WebRTC-Videoanrufe.",
+        fullDesc: "Reaktive Mobile-App für plattformübergreifenden Echtzeitaustausch mit intuitiver Chat-Navigation, Medienversand und WebRTC-Videoanrufen.",
         highlights: [
           "Echtzeit-Nachrichtenübertragung und Push-Benachrichtigungen",
           "Moderne UI mit Gruppen-, Einzelchats & Beifahrer-KI",
-          "Reaktive Datenbindung und Zustandsverwaltung mit Riverpod",
+          "Reaktive Zustandsverwaltung mit Riverpod",
           "Direkte APK-Bereitstellung für Android-Geräte"
         ],
         tech: ["Flutter", "Dart", "Riverpod", "WebSockets", "REST API", "WebRTC"],
@@ -710,14 +608,14 @@
         category: "php",
         icon: "⚡",
         language: "PHP / Laravel",
-        badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-        shortDesc: "Leistungsstarkes Backend, WebApp & REST/WebSocket-API für ChatConnect.",
-        fullDesc: "Zentraler Laravel-Serverdienst auf Raspberry Pi & Cloud. Bietet Authentifizierung, WebSocket-Echtzeitkommunikation, WebRTC-Calls, Statusanzeigen, 3D-STL-Streaming und die vollständige WebApp.",
+        badgeColor: "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30",
+        shortDesc: "Backend, WebApp & REST/WebSocket-API für ChatConnect.",
+        fullDesc: "Zentraler Laravel-Serverdienst auf Raspberry Pi & Cloud. Bietet Authentifizierung, WebSocket-Echtzeitkommunikation, WebRTC-Calls, 3D-STL-Streaming und die vollständige WebApp.",
         highlights: [
           "Echtzeit-WebSocket-Broadcasting & WebRTC Videoanrufe",
           "Integrierte WebApp mit Sprachnachrichten & Version 1.0.6",
           "Raspberry Pi Server-Deployment mit automatischer Synchronisation",
-          "REST-API für die native Flutter-App mit APK-Download-Distribution"
+          "REST-API für die native Flutter-App mit APK-Distribution"
         ],
         tech: ["PHP 8.2", "Laravel 11", "Blade", "MySQL", "WebSockets", "Raspberry Pi"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-backend",
@@ -730,15 +628,15 @@
         category: "other",
         icon: "📚",
         language: "Docs",
-        badgeColor: "bg-slate-500/20 text-slate-400 border-slate-500/30",
-        shortDesc: "Vollständige technische Spezifikation und Schnittstellendokumentation für ChatConnect.",
+        badgeColor: "bg-slate-500/15 text-slate-700 dark:text-slate-300 border-slate-500/30",
+        shortDesc: "Technische Spezifikation und Schnittstellendokumentation für ChatConnect.",
         fullDesc: "Enthält Architekturdiagramme, API-Endpunktdokumentation, Sicherheitsrichtlinien sowie Installationsleitfäden für Entwickler und Administratoren.",
         highlights: [
           "Strukturierte Endpunkt-Referenzen für Entwickler",
-          "Deployment- und Umgebungskonfigurations-Guides",
+          "Deployment- und Konfigurations-Guides",
           "Architektur-Übersichten"
         ],
-        tech: ["Markdown", "OpenAPI", "Architecture", "Technical Writing"],
+        tech: ["Markdown", "OpenAPI", "Architecture"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/chatconnect-docs"
       },
       {
@@ -747,15 +645,15 @@
         category: "flutter",
         icon: "🖋️",
         language: "Dart",
-        badgeColor: "bg-teal-500/20 text-teal-400 border-teal-500/30",
+        badgeColor: "bg-teal-500/15 text-teal-700 dark:text-teal-300 border-teal-500/30",
         shortDesc: "Schlanker Rich-Text Editor und Notizblock für fokussiertes Schreiben.",
-        fullDesc: "Eine elegante Notiz- und Schreib-App, die das Erstellen formatierter Texte, Listen und Notizen mit maximaler Übersichtlichkeit und Schnelligkeit ermöglicht.",
+        fullDesc: "Elegante Notiz- und Schreib-App zum Erstellen formatierter Texte, Listen und Notizen mit maximaler Übersichtlichkeit.",
         highlights: [
-          "Umfangreiche Textformatierung (Fett, Kursiv, Überschriften, Listen)",
-          "Flüssige Benutzeroberfläche ohne störende Menüüberladung",
+          "Textformatierung (Fett, Kursiv, Überschriften, Listen)",
+          "Flüssige Benutzeroberfläche ohne Menüüberladung",
           "Lokale Speicherung mit sofortiger Synchronisation"
         ],
-        tech: ["Flutter", "Dart", "RichText", "Quill Format", "Clean UI"],
+        tech: ["Flutter", "Dart", "RichText", "Quill Format"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/EasyQuill"
       },
       {
@@ -764,15 +662,15 @@
         category: "flutter",
         icon: "📐",
         language: "Dart",
-        badgeColor: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
-        shortDesc: "Flutter Web-App zum Skalieren, Zuschneiden und Bearbeiten von Bildern direkt im Browser.",
-        fullDesc: "Praktisches Client-Side Bildbearbeitungstool. Bilder werden direkt lokal im Browser skaliert, formatiert und zugeschnitten, ohne sensible Bilddaten an externe Server übertragen zu müssen.",
+        badgeColor: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/30",
+        shortDesc: "Flutter Web-App zum Skalieren und Zuschneiden von Bildern direkt im Browser.",
+        fullDesc: "Client-Side Bildbearbeitungstool: Bilder werden lokal im Browser skaliert, formatiert und zugeschnitten – 100% datenschutzfreundlich.",
         highlights: [
           "100% Client-Side Bildverarbeitung (Datenschutz & Speed)",
           "Vordefinierte Web- und Social-Media Seitenverhältnisse",
           "Verlustfreie Komprimierung & direkter Download"
         ],
-        tech: ["Flutter Web", "Dart", "HTML5 Canvas", "Image Compression"],
+        tech: ["Flutter Web", "Dart", "HTML5 Canvas", "Compression"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/resizer"
       },
       {
@@ -781,15 +679,15 @@
         category: "flutter",
         icon: "🥗",
         language: "Dart",
-        badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
-        shortDesc: "Gesundheits- & Ernährungs-App zur Erfassung und Auswertung von Nährwert-Punkten.",
-        fullDesc: "Begleitet Nutzer auf dem Weg zu gesunder Ernährung. Erfasst Mahlzeiten, berechnet Nährstoff-Scores und visualisiert den täglichen Fortschritt in motivierenden Grafiken.",
+        badgeColor: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30",
+        shortDesc: "Gesundheits- & Ernährungs-App zur Erfassung von Nährwert-Punkten.",
+        fullDesc: "Erfasst Mahlzeiten, berechnet Nährstoff-Scores und visualisiert den täglichen Fortschritt in motivierenden Grafiken.",
         highlights: [
           "Punkte-Berechnungssystem für Mahlzeiten und Aktivitäten",
           "Übersichtliches Tagebuch und Fortschrittsdiagramme",
           "Ergonomische Bedienung für schnelles Erfassen im Alltag"
         ],
-        tech: ["Flutter", "Dart", "Charts", "Local Storage", "Health Tech"],
+        tech: ["Flutter", "Dart", "Charts", "Local Storage"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/NutryPoints"
       },
       {
@@ -798,9 +696,9 @@
         category: "flutter",
         icon: "🎹",
         language: "Dart",
-        badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30",
-        shortDesc: "Interaktive Klavier- und Musik-App mit virtueller Klaviatur und Soundausgabe.",
-        fullDesc: "Eine fröhliche, interaktive Klavier-Anwendung für Kinder und Musikbegeisterte mit sofortigem Audio-Feedback und optischer Tastenanimation.",
+        badgeColor: "bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30",
+        shortDesc: "Interaktive Klavier-App mit virtueller Klaviatur und Soundausgabe.",
+        fullDesc: "Fröhliche, interaktive Klavier-Anwendung für Kinder und Musikbegeisterte mit sofortigem Audio-Feedback und optischer Tastenanimation.",
         highlights: [
           "Latenzarme polyphone Klavier-Soundausgabe",
           "Visuelle Tasten-Hervorhebung beim Spielen",
@@ -815,15 +713,15 @@
         category: "flutter",
         icon: "📄",
         language: "Dart",
-        badgeColor: "bg-rose-500/20 text-rose-400 border-rose-500/30",
-        shortDesc: "Markdown-zu-PDF Konverter mit Live-Vorschau und professionellem Layout.",
-        fullDesc: "Wandelt strukturierte Markdown-Dokumente blitzschnell in saubere, druckfertige PDF-Dateien um. Perfekt für Dokumentationen, Rechnungen und Protokolle.",
+        badgeColor: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30",
+        shortDesc: "Markdown-zu-PDF Konverter mit Live-Vorschau und druckfertigem Layout.",
+        fullDesc: "Wandelt strukturierte Markdown-Dokumente blitzschnell in saubere, druckfertige PDF-Dateien um.",
         highlights: [
           "Echtzeit-Vorschau während des Schreibens",
           "Automatisches Syntax-Highlighting für Codeblöcke",
           "Export als druckfertiges PDF"
         ],
-        tech: ["Flutter", "Dart", "PDF Engine", "Markdown Parser"],
+        tech: ["Flutter", "Dart", "PDF Engine", "Markdown"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/MarkPDF"
       },
       {
@@ -832,11 +730,11 @@
         category: "php",
         icon: "📅",
         language: "PHP / Blade",
-        badgeColor: "bg-yellow-500/20 text-yellow-500 border-yellow-500/30",
-        shortDesc: "Termin-Finder und Umfrage-Tool ähnlich wie Doodle zur einfachen Terminabstimmung.",
-        fullDesc: "Eine schlanke Schweizer Alternative zu Doodle für Freunde, Vereine und Teams. Erstelle Terminumfragen ohne Benutzerkonto und finde im Handumdrehen das passende Datum.",
+        badgeColor: "bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30",
+        shortDesc: "Schweizer Termin-Finder und Umfrage-Tool (Doodle-Alternative).",
+        fullDesc: "Schlanke Schweizer Alternative zu Doodle für Freunde, Vereine und Teams – Terminumfragen ohne Benutzerkonto erstellen.",
         highlights: [
-          "Einfaches Erstellen von Terminumfragen mit wenigen Klicks",
+          "Terminumfragen mit wenigen Klicks erstellen",
           "Klare Übersicht mit Ja/Nein/Vielleicht-Abstimmungen",
           "Datensparsam und schnell auf allen Geräten nutzbar"
         ],
@@ -849,9 +747,9 @@
         category: "php",
         icon: "🍲",
         language: "PHP",
-        badgeColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
-        shortDesc: "Digitale Rezeptsammlung zum Organisieren, Kochen und Entdecken von Lieblingsrezepten.",
-        fullDesc: "Das digitale Familien-Kochbuch: Rezepte übersichtlich speichern, Zutatenmengen anpassen und Schritt-für-Schritt leckere Mahlzeiten zubereiten.",
+        badgeColor: "bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/30",
+        shortDesc: "Digitale Rezeptsammlung zum Organisieren und Kochen von Familienrezepten.",
+        fullDesc: "Das digitale Familien-Kochbuch: Rezepte speichern, Zutatenmengen automatisch anpassen und Schritt-für-Schritt kochen.",
         highlights: [
           "Kategorisierung nach Mahlzeit, Kochzeit und Zutaten",
           "Automatische Mengenanpassung an Personenanzahl",
@@ -866,15 +764,15 @@
         category: "other",
         icon: "✉️",
         language: "Python / Flutter",
-        badgeColor: "bg-sky-500/20 text-sky-400 border-sky-500/30",
-        shortDesc: "Moderner E-Mail-App-Klon mit intuitiver Benutzeroberfläche und Mail-Verwaltung.",
-        fullDesc: "Konzeptioneller Nachbau eines modernen Mail-Clients mit Fokus auf intuitive Ordner-Strukturen, schnelle Suche und übersichtliches Threading.",
+        badgeColor: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/30",
+        shortDesc: "Moderner E-Mail-App-Klon mit intuitiver Ordner-Struktur und Wischgesten.",
+        fullDesc: "Konzeptioneller Nachbau eines modernen Mail-Clients mit Fokus auf Ordner-Strukturen, schnelle Suche und Threading.",
         highlights: [
           "Konversations-Ansicht für zusammenhängende E-Mails",
           "Wischgesten zum schnellen Archivieren oder Löschen",
           "Klares, aufgeräumtes Posteingangsdesign"
         ],
-        tech: ["Python", "Flutter", "Mail Protocols", "UI Mockup"],
+        tech: ["Python", "Flutter", "Mail Protocols"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/mail-clone"
       },
       {
@@ -883,9 +781,9 @@
         category: "php",
         icon: "📬",
         language: "PHP",
-        badgeColor: "bg-violet-500/20 text-violet-400 border-violet-500/30",
-        shortDesc: "Backend-Dienste und Server-Schnittstellen für die Mail-Clone Applikation.",
-        fullDesc: "Stellt Verbindung zu Mailservern her, verwaltet Zugangsdaten sicher und liefert formatierte Maildaten an das Frontend aus.",
+        badgeColor: "bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30",
+        shortDesc: "Backend-Dienste und IMAP/SMTP-Schnittstellen für die Mail-Clone App.",
+        fullDesc: "Stellt Verbindung zu Mailservern her, verwaltet Zugangsdaten sicher und liefert formatierte Maildaten an das Frontend.",
         highlights: [
           "IMAP/SMTP Mail-Synchronisation",
           "Sichere Authentifizierung",
@@ -900,15 +798,15 @@
         category: "php",
         icon: "🍓",
         language: "PHP / Blade",
-        badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
-        shortDesc: "Automatisches Deployment- und Verwaltungstool für Raspberry Pi Einplatinencomputer.",
-        fullDesc: "Erleichtert das Ausrollen und Verwalten von Web-Apps und Skripten auf Raspberry Pi Geräten über ein einfaches Web-Dashboard.",
+        badgeColor: "bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/30",
+        shortDesc: "Automatisches Deployment- und Verwaltungstool für Raspberry Pi.",
+        fullDesc: "Erleichtert das Ausrollen und Verwalten von Web-Apps und Skripten auf Raspberry Pi Geräten über ein Web-Dashboard.",
         highlights: [
           "One-Click Deployments für lokale Pi-Services",
           "Hardware- und Temperaturüberwachung",
           "Automatisierte Git-Pull und Build-Abläufe"
         ],
-        tech: ["PHP", "Blade", "Raspberry Pi", "Linux Automation"],
+        tech: ["PHP", "Blade", "Raspberry Pi", "Linux"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/pi-deployer"
       },
       {
@@ -917,9 +815,9 @@
         category: "php",
         icon: "🔬",
         language: "PHP",
-        badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30",
-        shortDesc: "Demo Laravel-Applikation zum Testen und Validieren der pi-deployer Pipeline.",
-        fullDesc: "Testumgebung mit Health-Checks und Status-Endpunkten, um automatisierte Aktualisierungen über den pi-deployer zuverlässig zu erproben.",
+        badgeColor: "bg-pink-500/15 text-pink-700 dark:text-pink-300 border-pink-500/30",
+        shortDesc: "Demo Laravel-Applikation zum Testen der pi-deployer Pipeline.",
+        fullDesc: "Testumgebung mit Health-Checks und Status-Endpunkten zur Validierung automatisierter pi-deployer Updates.",
         highlights: [
           "Automatische Versionsprüfung",
           "Health-Checks für CI/CD-Pipelines",
@@ -934,15 +832,15 @@
         category: "other",
         icon: "🧊",
         language: "Java",
-        badgeColor: "bg-rose-600/20 text-rose-400 border-rose-600/30",
+        badgeColor: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30",
         shortDesc: "3D-Viewer zur Betrachtung und Analyse von STL-Dateien (3D-Druck / CAD).",
-        fullDesc: "Desktop-Software in Java zur Visualisierung von 3D-Geometrien im stereolithografischen STL-Format mit Rotation, Zoom und Schnittmodellierung.",
+        fullDesc: "Desktop-Software in Java zur Visualisierung von 3D-Geometrien im STL-Format mit Rotation, Zoom und Schnittmodellierung.",
         highlights: [
           "Interaktives 3D-Rendering von Triangulierungs-Netzen",
-          "Drehen, Zoomen und Verschieben mit Mausinteraktion",
-          "Modellanalyse für 3D-Drucker-Vorbereitungen"
+          "Drehen, Zoomen und Verschieben per Maus",
+          "Modellanalyse für 3D-Druck-Vorbereitungen"
         ],
-        tech: ["Java", "3D Graphics", "OpenGL / Java3D", "CAD/STL Parser"],
+        tech: ["Java", "OpenGL / Java3D", "CAD/STL Parser"],
         githubUrl: "https://github.com/roberthoferzuerich-alt/java-stl-viewer"
       }
     ];
@@ -951,162 +849,125 @@
     let searchQuery = '';
     let currentTheme = localStorage.getItem('theme') || 'dark';
     let currentModalRepo = null;
+    let activeShareUrl = '';
+    let activeShareTitle = '';
+    let toastTimer = null;
 
-    // Tactile Vibration Helper for mobile & tablets
-    function triggerHaptic(duration = 10) {
-      if (window.navigator && window.navigator.vibrate) {
-        try {
-          window.navigator.vibrate(duration);
-        } catch (e) {
-          // ignore
-        }
+    function triggerHaptic(ms = 8) {
+      if (navigator.vibrate) {
+        try { navigator.vibrate(ms); } catch (_) {}
       }
     }
 
-    function initTheme() {
-      applyTheme(currentTheme);
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const isDark = theme === 'dark';
+      root.classList.toggle('dark', isDark);
+      root.classList.toggle('light', !isDark);
+
+      document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+      document.getElementById('themeText').textContent = isDark ? 'Dunkel' : 'Hell';
+      document.getElementById('themeColorMeta').setAttribute('content', isDark ? '#0F0B17' : '#F8F7FA');
+      document.getElementById('colorSchemeMeta').setAttribute('content', isDark ? 'dark' : 'only light');
+      root.style.colorScheme = isDark ? 'dark' : 'only light';
     }
 
     function toggleTheme() {
-      triggerHaptic(12);
+      triggerHaptic(10);
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', currentTheme);
       applyTheme(currentTheme);
     }
 
-    function applyTheme(theme) {
-      const body = document.getElementById('appBody');
-      const themeIcon = document.getElementById('themeIcon');
-      const themeText = document.getElementById('themeText');
-      const toggleBtn = document.getElementById('themeToggleBtn');
-      const themeColorMeta = document.getElementById('themeColorMeta');
-
-      if (theme === 'dark') {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-        themeIcon.innerText = '🌙';
-        themeText.innerText = 'Dunkel';
-        toggleBtn.className = "touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-bold shadow-md transition-all text-white";
-        if (themeColorMeta) themeColorMeta.setAttribute('content', '#120E1C');
-      } else {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-        themeIcon.innerText = '☀️';
-        themeText.innerText = 'Hell';
-        toggleBtn.className = "touch-press inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 text-xs sm:text-sm font-bold shadow-md transition-all text-slate-800";
-        if (themeColorMeta) themeColorMeta.setAttribute('content', '#FAF8FC');
-      }
-      renderRepositories();
-    }
-
     function renderRepositories() {
       const grid = document.getElementById('repoGrid');
       const emptyState = document.getElementById('emptyState');
-      grid.innerHTML = '';
+      const q = searchQuery.toLowerCase();
 
       const filtered = repositories.filter(repo => {
-        const matchesCategory = currentFilter === 'all' || repo.category === currentFilter;
-        const matchesSearch = repo.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                              repo.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                              repo.language.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                              repo.tech.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
-        return matchesCategory && matchesSearch;
+        const matchesCat = currentFilter === 'all' || repo.category === currentFilter;
+        const matchesQuery = !q ||
+          repo.name.toLowerCase().includes(q) ||
+          repo.shortDesc.toLowerCase().includes(q) ||
+          repo.language.toLowerCase().includes(q) ||
+          repo.tech.some(t => t.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
       });
 
-      if (filtered.length === 0) {
-        emptyState.classList.remove('hidden');
-      } else {
-        emptyState.classList.add('hidden');
-      }
+      emptyState.classList.toggle('hidden', filtered.length > 0);
 
-      filtered.forEach((repo, index) => {
-        const card = document.createElement('div');
-        card.className = 'glass-card card-touch rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col justify-between cursor-pointer animate-fadeInUp group relative';
-        card.style.animationDelay = `${Math.min(index * 30, 300)}ms`;
+      const frag = document.createDocumentFragment();
+      filtered.forEach((repo, i) => {
+        const article = document.createElement('article');
+        article.className = 'surface-card animate-card rounded-2xl p-4 flex flex-col justify-between gap-3 cursor-pointer w-full';
+        article.style.animationDelay = `${Math.min(i * 25, 220)}ms`;
+        article.onclick = () => openModal(repo.id);
 
-        // Tech preview pills (first 3)
-        const techPreview = repo.tech.slice(0, 3).map(t => 
-          `<span class="text-[10px] sm:text-[11px] px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 opacity-75 font-medium">${t}</span>`
-        ).join('');
+        const techTags = repo.tech.slice(0, 3)
+          .map(t => `<span class="text-[11px] px-2 py-0.5 rounded-md surface-pill font-medium">${t}</span>`)
+          .join('');
 
-        card.innerHTML = `
-          <div onclick="openModal('${repo.id}')">
-            <!-- Card Header: App Icon & Category Badges -->
-            <div class="flex items-center justify-between mb-3.5">
-              <span class="card-icon-bg text-2xl sm:text-3xl p-2 sm:p-2.5 rounded-2xl border shadow-sm shrink-0">${repo.icon}</span>
-              <div class="flex items-center gap-1.5 flex-wrap justify-end">
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${repo.badgeColor}">${repo.language}</span>
+        article.innerHTML = `
+          <div class="space-y-2.5">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl surface-icon flex items-center justify-center text-2xl shrink-0" aria-hidden="true">${repo.icon}</div>
+              <div class="min-w-0 flex-1">
+                <h2 class="fluid-card-title font-bold truncate">${repo.name}</h2>
+                <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
+                  <span class="px-2 py-0.5 rounded-md text-[11px] font-bold border ${repo.badgeColor}">${repo.language}</span>
+                  ${repo.liveUrl ? '<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-teal-500/15 text-teal-700 dark:text-teal-300 border border-teal-500/30">Live 🚀</span>' : ''}
+                  ${repo.directApkUrl ? '<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">APK 📥</span>' : ''}
+                </div>
               </div>
             </div>
 
-            <!-- Title & Live Badges -->
-            <h3 class="card-title text-base sm:text-lg font-bold mb-1.5 group-hover:text-pink-500 transition-colors flex items-center gap-1.5 flex-wrap">
-              <span>${repo.name}</span>
-              ${repo.liveUrl ? '<span class="text-[9px] sm:text-[10px] bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded-full font-bold border border-teal-500/30">Live 🚀</span>' : ''}
-              ${repo.category === 'flutter' ? '<span class="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">Release 📥</span>' : ''}
-            </h3>
+            <p class="fluid-body text-secondary line-clamp-2">${repo.shortDesc}</p>
 
-            <!-- Short Description -->
-            <p class="card-desc text-xs sm:text-sm line-clamp-2 leading-relaxed mb-3">
-              ${repo.shortDesc}
-            </p>
-
-            <!-- Tech Pills Preview -->
-            <div class="flex items-center gap-1.5 flex-wrap mb-3.5">
-              ${techPreview}
-            </div>
+            <div class="flex items-center gap-1.5 flex-wrap">${techTags}</div>
           </div>
-          
-          <!-- Bottom Action Row: Direct Tap Actions + Details Button -->
-          <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs gap-2">
-            <button onclick="openModal('${repo.id}')" class="text-pink-500 font-bold inline-flex items-center gap-1 hover:translate-x-0.5 transition-transform py-1">
+
+          <div class="pt-2.5 border-t border-subtle flex items-center justify-between gap-2">
+            <button type="button" onclick="event.stopPropagation(); openModal('${repo.id}')" class="touch-target inline-flex items-center gap-1 px-2 -ml-2 rounded-xl text-pink-600 dark:text-pink-400 font-bold text-sm">
               <span>Details</span>
-              <span>→</span>
+              <span aria-hidden="true">→</span>
             </button>
 
             <div class="flex items-center gap-1.5">
               ${repo.liveUrl ? `
-                <a href="${repo.liveUrl}" target="_blank" onclick="event.stopPropagation(); triggerHaptic(8);" class="touch-press inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-500/15 hover:bg-teal-500/25 border border-teal-500/30 text-teal-400 font-bold text-[11px] transition-all" title="WebApp im Browser öffnen">
-                  <span>🌐</span>
-                  <span class="hidden xs:inline">WebApp</span>
+                <a href="${repo.liveUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation(); triggerHaptic();" class="touch-target inline-flex items-center justify-center gap-1 px-3 rounded-xl bg-teal-600 text-white font-bold text-xs" aria-label="${repo.name} WebApp öffnen">
+                  <span>🌐</span><span>App</span>
                 </a>
               ` : ''}
               ${repo.directApkUrl ? `
-                <a href="${repo.directApkUrl}" download onclick="event.stopPropagation(); triggerHaptic(8);" class="touch-press inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 font-bold text-[11px] transition-all" title="APK Installationsdatei herunterladen">
-                  <span>📥</span>
-                  <span class="hidden xs:inline">APK</span>
+                <a href="${repo.directApkUrl}" download onclick="event.stopPropagation(); triggerHaptic();" class="touch-target inline-flex items-center justify-center gap-1 px-3 rounded-xl bg-emerald-600 text-white font-bold text-xs" aria-label="${repo.name} APK herunterladen">
+                  <span>📥</span><span>APK</span>
                 </a>
               ` : ''}
-              <a href="${repo.githubUrl}" target="_blank" onclick="event.stopPropagation(); triggerHaptic(8);" class="opacity-60 hover:opacity-100 p-1 font-medium transition-opacity" title="Auf GitHub öffnen">
+              <a href="${repo.githubUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation(); triggerHaptic();" class="touch-target surface-pill inline-flex items-center justify-center rounded-xl text-sm font-bold" aria-label="${repo.name} auf GitHub öffnen" title="GitHub">
                 ↗
               </a>
             </div>
           </div>
         `;
-        grid.appendChild(card);
+        frag.appendChild(article);
       });
+
+      grid.replaceChildren(frag);
     }
 
     function setFilter(filter) {
-      triggerHaptic(8);
+      triggerHaptic();
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.dataset.filter === filter) {
-          btn.className = "touch-press filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-md shadow-pink-500/25 whitespace-nowrap";
-        } else {
-          btn.className = "touch-press filter-btn filter-unselected px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap";
-        }
+        const active = btn.dataset.filter === filter;
+        btn.setAttribute('aria-selected', String(active));
+        btn.classList.toggle('surface-pill-active', active);
+        btn.classList.toggle('surface-pill', !active);
       });
       renderRepositories();
     }
 
     function resetFilters() {
-      triggerHaptic(8);
-      currentFilter = 'all';
       searchQuery = '';
       document.getElementById('searchInput').value = '';
       document.getElementById('clearSearchBtn').classList.add('hidden');
@@ -1123,274 +984,237 @@
       renderRepositories();
     }
 
-    const searchInput = document.getElementById('searchInput');
-    const clearSearchBtn = document.getElementById('clearSearchBtn');
-
-    searchInput.addEventListener('input', (e) => {
+    document.getElementById('searchInput').addEventListener('input', e => {
       searchQuery = e.target.value.trim();
-      if (searchQuery.length > 0) {
-        clearSearchBtn.classList.remove('hidden');
-      } else {
-        clearSearchBtn.classList.add('hidden');
-      }
+      document.getElementById('clearSearchBtn').classList.toggle('hidden', !searchQuery);
       renderRepositories();
     });
 
+    function toggleBodyLock(locked) {
+      document.body.style.overflow = locked ? 'hidden' : '';
+      const fab = document.getElementById('backToTopBtn');
+      if (locked) {
+        fab.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      } else {
+        updateFabVisibility();
+      }
+    }
+
     function openModal(repoId) {
-      triggerHaptic(12);
       const repo = repositories.find(r => r.id === repoId);
       if (!repo) return;
+      triggerHaptic(10);
       currentModalRepo = repo;
 
-      document.getElementById('modalIcon').innerText = repo.icon;
-      document.getElementById('modalTitle').innerText = repo.name;
-      document.getElementById('modalLanguage').innerText = repo.language;
-      document.getElementById('modalCategory').innerText = repo.category.toUpperCase();
-      document.getElementById('modalDescription').innerText = repo.fullDesc;
+      document.getElementById('modalIcon').textContent = repo.icon;
+      document.getElementById('modalTitle').textContent = repo.name;
+      document.getElementById('modalLanguage').textContent = repo.language;
+      document.getElementById('modalCategory').textContent = repo.category.toUpperCase();
+      document.getElementById('modalDescription').textContent = repo.fullDesc;
       document.getElementById('modalBrowserLink').href = repo.githubUrl;
 
-      // Highlights
-      const hlContainer = document.getElementById('modalHighlights');
-      hlContainer.innerHTML = repo.highlights.map(h => `
-        <li class="flex items-start gap-2">
-          <span class="text-pink-500 font-bold shrink-0">✓</span>
-          <span class="opacity-90 leading-snug">${h}</span>
-        </li>
-      `).join('');
+      document.getElementById('modalHighlights').innerHTML = repo.highlights
+        .map(h => `<li class="flex items-start gap-2"><span class="text-pink-600 dark:text-pink-400 font-bold shrink-0">✓</span><span>${h}</span></li>`)
+        .join('');
 
-      // Tech Stack
-      const techContainer = document.getElementById('modalTech');
-      techContainer.innerHTML = repo.tech.map(t => `
-        <span class="modal-badge px-2.5 py-1 rounded-xl text-xs font-semibold border">
-          ${t}
-        </span>
-      `).join('');
+      document.getElementById('modalTech').innerHTML = repo.tech
+        .map(t => `<span class="surface-pill px-2.5 py-1 rounded-lg text-xs font-semibold">${t}</span>`)
+        .join('');
 
-      // Release & Zip Download Box
-      const dlSection = document.getElementById('modalDownloadSection');
       const webBtn = document.getElementById('modalWebBtn');
       const releaseBtn = document.getElementById('modalReleaseBtn');
       const zipBtn = document.getElementById('modalZipBtn');
+      const liveBtn = document.getElementById('modalLiveDemo');
 
-      dlSection.classList.remove('hidden');
-
-      // WebApp Button
+      webBtn.classList.toggle('hidden', !repo.liveUrl);
+      liveBtn.classList.toggle('hidden', !repo.liveUrl);
       if (repo.liveUrl) {
         webBtn.href = repo.liveUrl;
-        webBtn.classList.remove('hidden');
-      } else {
-        webBtn.classList.add('hidden');
+        liveBtn.href = repo.liveUrl;
       }
 
-      // APK Download / Release Button
       if (repo.directApkUrl) {
         releaseBtn.href = repo.directApkUrl;
-        releaseBtn.className = "touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
-        releaseBtn.innerHTML = `
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>Release (.apk) 📥</span>
-        `;
         releaseBtn.setAttribute('download', `${repo.name}.apk`);
+        releaseBtn.innerHTML = '<span>📥 Release (.apk)</span>';
         releaseBtn.classList.remove('hidden');
-      } else if (repo.category === 'flutter' || repo.category === 'mobile') {
+        zipBtn.classList.remove('col-span-2');
+      } else if (repo.category === 'flutter') {
         releaseBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/releases`;
-        releaseBtn.className = "touch-press flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition-all";
-        releaseBtn.innerHTML = `
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>Releases (.apk & Assets)</span>
-        `;
         releaseBtn.removeAttribute('download');
+        releaseBtn.innerHTML = '<span>📥 Releases</span>';
         releaseBtn.classList.remove('hidden');
+        zipBtn.classList.remove('col-span-2');
       } else {
         releaseBtn.classList.add('hidden');
+        zipBtn.classList.add('col-span-2');
       }
 
       zipBtn.href = `https://github.com/roberthoferzuerich-alt/${repo.id}/archive/refs/heads/main.zip`;
 
-      // Live Demo Link
-      const liveBtn = document.getElementById('modalLiveDemo');
-      if (repo.liveUrl) {
-        liveBtn.href = repo.liveUrl;
-        liveBtn.innerHTML = `
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          <span>Live Demo öffnen 🚀</span>
-        `;
-        liveBtn.classList.remove('hidden');
-      } else {
-        liveBtn.classList.add('hidden');
-      }
-
-      // Show Modal with Bottom Sheet animation
+      document.getElementById('modalScrollArea').scrollTop = 0;
       const modal = document.getElementById('detailModal');
       const box = document.getElementById('modalBox');
+      box.style.transform = '';
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      box.classList.add('sheet-visible');
-      document.body.style.overflow = 'hidden'; // prevent background scrolling on mobile
+      requestAnimationFrame(() => box.classList.add('is-open'));
+      toggleBodyLock(true);
     }
 
     function closeModal() {
       triggerHaptic(6);
       const modal = document.getElementById('detailModal');
       const box = document.getElementById('modalBox');
-      box.classList.remove('sheet-visible');
+      box.style.transform = '';
+      box.classList.remove('is-open');
       modal.classList.add('opacity-0', 'pointer-events-none');
-      document.body.style.overflow = '';
+      toggleBodyLock(false);
     }
 
-    // Close on backdrop click
-    document.getElementById('detailModal').addEventListener('click', (e) => {
-      if (e.target.id === 'detailModal') closeModal();
-    });
+    // Native Swipe-Down-to-Close Gesture on Mobile Bottom Sheet
+    (function initSheetSwipe() {
+      const handle = document.getElementById('detailDragHandle');
+      const box = document.getElementById('modalBox');
+      let startY = 0;
+      let deltaY = 0;
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeModal();
-        closeQrModal();
-      }
-    });
+      handle.addEventListener('touchstart', e => {
+        startY = e.touches[0].clientY;
+        deltaY = 0;
+        box.style.transition = 'none';
+      }, { passive: true });
 
-    // Native Share or QR Modal Handler
+      handle.addEventListener('touchmove', e => {
+        deltaY = Math.max(0, e.touches[0].clientY - startY);
+        box.style.transform = `translate3d(0, ${deltaY}px, 0)`;
+      }, { passive: true });
+
+      handle.addEventListener('touchend', () => {
+        box.style.transition = '';
+        if (deltaY > 90) {
+          closeModal();
+        } else {
+          box.style.transform = '';
+        }
+      }, { passive: true });
+    })();
+
     function handleShareOrQr() {
       triggerHaptic(10);
-      const shareData = {
+      const data = {
         title: 'Robert Hofer – Portfolio Showcase 🚀🇨🇭',
-        text: 'Entdecke die Flutter-, Web- und Backend-Projekte von Robert Hofer (Zürich)!',
+        text: 'Entdecke 17 Flutter-, Laravel- & Tool-Projekte von Robert Hofer (Zürich)!',
         url: 'https://roberthoferzuerich-alt.github.io/portfolio/'
       };
-
       if (navigator.share) {
-        navigator.share(shareData).catch((err) => {
-          if (err.name !== 'AbortError') {
-            openQrModal('portfolio');
-          }
+        navigator.share(data).catch(err => {
+          if (err.name !== 'AbortError') openQrModal('portfolio');
         });
       } else {
         openQrModal('portfolio');
       }
     }
 
-    let activeShareUrl = '';
-    let activeShareTitle = '';
-
     function openQrModal(type, customUrl, customTitle, customSub) {
       triggerHaptic(10);
-      const qrModal = document.getElementById('qrModal');
-      const qrBox = document.getElementById('qrModalBox');
-      const qrImg = document.getElementById('qrCodeImage');
-      const qrTitle = document.getElementById('qrModalTitle');
-      const qrSub = document.getElementById('qrModalSubtitle');
-      const qrInput = document.getElementById('qrUrlInput');
-      const nativeBtn = document.getElementById('nativeShareBtn');
-
-      let targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
-      let title = 'Auf Smartphone aufrufen 📲';
-      let subtitle = 'Scanne den Code mit deiner Smartphone-Kamera:';
-
-      if (type === 'portfolio') {
-        targetUrl = 'https://roberthoferzuerich-alt.github.io/portfolio/';
-        title = 'Portfolio am Smartphone 📲';
-        subtitle = 'Scanne den Code für die mobile WebApp-Ansicht:';
-      } else if (customUrl) {
-        targetUrl = customUrl;
-        title = customTitle || 'App aufrufen';
-        subtitle = customSub || 'Scanne den Code mit deinem Smartphone:';
-      }
+      const targetUrl = type === 'portfolio'
+        ? 'https://roberthoferzuerich-alt.github.io/portfolio/'
+        : (customUrl || 'https://roberthoferzuerich-alt.github.io/portfolio/');
 
       activeShareUrl = targetUrl;
-      activeShareTitle = title;
+      activeShareTitle = customTitle || 'Robert Hofer Portfolio 📲';
 
-      qrTitle.innerText = title;
-      qrSub.innerText = subtitle;
-      qrInput.value = targetUrl;
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(targetUrl)}`;
+      document.getElementById('qrModalTitle').textContent = activeShareTitle;
+      document.getElementById('qrModalSubtitle').textContent = customSub || 'Code scannen oder Direktlink teilen:';
+      document.getElementById('qrUrlInput').value = targetUrl;
+      document.getElementById('qrCodeImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(targetUrl)}`;
+      document.getElementById('nativeShareBtn').classList.toggle('hidden', !navigator.share);
 
-      if (navigator.share) {
-        nativeBtn.classList.remove('hidden');
-      } else {
-        nativeBtn.classList.add('hidden');
+      const modal = document.getElementById('qrModal');
+      const box = document.getElementById('qrModalBox');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      requestAnimationFrame(() => box.classList.add('is-open'));
+      toggleBodyLock(true);
+    }
+
+    function openCurrentProjectQr() {
+      if (!currentModalRepo) return;
+      const url = currentModalRepo.directApkUrl || currentModalRepo.liveUrl || `https://github.com/roberthoferzuerich-alt/${currentModalRepo.id}/releases`;
+      const sub = currentModalRepo.directApkUrl
+        ? 'QR-Code für den direkten Android APK-Download:'
+        : (currentModalRepo.liveUrl ? 'QR-Code für die Live WebApp:' : 'QR-Code für die Projekt-Releases:');
+      openQrModal('project', url, `${currentModalRepo.name} 📲`, sub);
+    }
+
+    function closeQrModal() {
+      triggerHaptic(6);
+      const modal = document.getElementById('qrModal');
+      const box = document.getElementById('qrModalBox');
+      box.classList.remove('is-open');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      if (document.getElementById('detailModal').classList.contains('pointer-events-none')) {
+        toggleBodyLock(false);
       }
-
-      qrModal.classList.remove('opacity-0', 'pointer-events-none');
-      qrBox.classList.add('sheet-visible');
-      document.body.style.overflow = 'hidden';
     }
 
     function triggerNativeShare() {
       triggerHaptic(8);
       if (navigator.share) {
-        navigator.share({
-          title: activeShareTitle || 'Robert Hofer Showcase',
-          text: 'Hier ansehen:',
-          url: activeShareUrl
-        }).catch(() => {});
+        navigator.share({ title: activeShareTitle, url: activeShareUrl }).catch(() => {});
       }
     }
 
-    function openCurrentProjectQr() {
-      if (!currentModalRepo) return;
-      const isApk = !!currentModalRepo.directApkUrl;
-      const url = currentModalRepo.directApkUrl || currentModalRepo.liveUrl || `https://github.com/roberthoferzuerich-alt/${currentModalRepo.id}/releases`;
-      const title = `${currentModalRepo.name} 📲`;
-      const subtitle = isApk 
-        ? 'Scanne diesen Code mit deinem Smartphone für den direkten APK-Download:' 
-        : (currentModalRepo.liveUrl ? 'Scanne den Code, um die Web-App direkt auf dem Smartphone zu öffnen:' : 'Scanne den Code für die Releases:');
-      
-      openQrModal('project', url, title, subtitle);
-    }
-
-    function closeQrModal() {
-      triggerHaptic(6);
-      const qrModal = document.getElementById('qrModal');
-      const qrBox = document.getElementById('qrModalBox');
-      qrBox.classList.remove('sheet-visible');
-      qrModal.classList.add('opacity-0', 'pointer-events-none');
-      document.body.style.overflow = '';
-    }
-
-    function showToast(message, icon = '📋') {
+    function showToast(message, icon = '✅') {
       const toast = document.getElementById('toastNotification');
-      document.getElementById('toastMessage').innerText = message;
-      document.getElementById('toastIcon').innerText = icon;
+      document.getElementById('toastMessage').textContent = message;
+      document.getElementById('toastIcon').textContent = icon;
       toast.classList.remove('opacity-0');
-      triggerHaptic(15);
-      
-      setTimeout(() => {
-        toast.classList.add('opacity-0');
-      }, 2500);
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('opacity-0'), 2200);
     }
 
     function copyQrUrl() {
       const input = document.getElementById('qrUrlInput');
       input.select();
-      navigator.clipboard.writeText(input.value).then(() => {
-        showToast('Link kopiert!', '✅');
-      }).catch(() => {
-        showToast('Link markiert zum Kopieren', '📋');
-      });
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(input.value)
+          .then(() => showToast('Link kopiert!'))
+          .catch(() => showToast('Link markiert', '📋'));
+      } else {
+        showToast('Link markiert', '📋');
+      }
     }
 
-    document.getElementById('qrModal').addEventListener('click', (e) => {
+    document.getElementById('detailModal').addEventListener('click', e => {
+      if (e.target.id === 'detailModal') closeModal();
+    });
+    document.getElementById('qrModal').addEventListener('click', e => {
       if (e.target.id === 'qrModal') closeQrModal();
     });
-
-    // Floating Back-to-Top Button
-    const backToTopBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 280) {
-        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-      } else {
-        backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeQrModal();
+        closeModal();
       }
-    }, { passive: true });
+    });
+
+    function updateFabVisibility() {
+      const fab = document.getElementById('backToTopBtn');
+      const show = window.scrollY > 280 && document.body.style.overflow !== 'hidden';
+      fab.classList.toggle('opacity-0', !show);
+      fab.classList.toggle('pointer-events-none', !show);
+      fab.classList.toggle('translate-y-3', !show);
+    }
+    window.addEventListener('scroll', updateFabVisibility, { passive: true });
 
     function scrollToTop() {
-      triggerHaptic(10);
+      triggerHaptic(8);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Init Theme & Render on load
-    initTheme();
+    // Init
+    applyTheme(currentTheme);
+    renderRepositories();
   </script>
 </body>
 </html>
